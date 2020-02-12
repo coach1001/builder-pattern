@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using CoreDui.Definitions;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoreDui.FlowControllerFeature
 {

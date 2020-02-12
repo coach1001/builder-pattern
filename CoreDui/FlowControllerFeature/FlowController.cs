@@ -6,8 +6,7 @@ using System.Linq;
 
 
 namespace CoreDui.FlowControllerFeature
-{    
-    [Authorize(Policy = "IsAccountEnabled")]
+{        
     [ApiController]    
     [FlowControllerName]
     [Route("[controller]")]

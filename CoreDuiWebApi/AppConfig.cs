@@ -7,12 +7,15 @@ namespace CoreDuiWebApi
 {
     public class AppConfig
     {
-        public string ApiName { get; set; }
-        public string ApiBaseUrl { get; set; }
-        public string ApiPort { get; set; }
-        public string UiName { get; set; }
-        public string UiBaseUrl { get; set; }
+        public string Name { get; set; }
+        public string ApiHost { get; set; }
+        public int ApiPort { get; set; }
+        public string ApiBasePath { get; set; }
+        public string UiHost { get; set; }
         public string UiPort { get; set; }
         public string CommsFromEmail { get; set; }
+        public string ApiAccountValidatePath { get; set; }
+        public string UiAccountValidationSuccessPath { get; set; }
+        public string UiAccountValidationFailedPath { get; set; }
     }
 }

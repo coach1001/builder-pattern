@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using CoreDuiWebApi.Authentication;
+using CoreDuiWebApi.Email.Templates;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using CoreDuiWebApi.Authentication.DbUserEf;
+using Microsoft.Extensions.Options;
 
 namespace CoreDuiWebApi.Controllers
 {
@@ -13,14 +13,30 @@ namespace CoreDuiWebApi.Controllers
     public class SecurityController : ControllerBase
     {
         private readonly IAuthenticationService<DbUserClient> _authDbService;
-        private readonly IAuthenticationService<LdapUser> _authLdapService;              
+        private readonly IAuthenticationService<LdapUser> _authLdapService;
+        private readonly IEmailTemplates _emailTemplates;
+        private readonly AppConfig _appConfig;
 
         public SecurityController(
             IAuthenticationService<DbUserClient> authDbService,
-            IAuthenticationService<LdapUser> authLdapService)
+            IAuthenticationService<LdapUser> authLdapService,
+            IEmailTemplates emailTemplates,
+            IOptions<AppConfig> appConfig)
         {
             _authDbService = authDbService;
-            _authLdapService = authLdapService;            
+            _authLdapService = authLdapService;
+            _emailTemplates = emailTemplates;
+            _appConfig = appConfig.Value;
+        }
+
+        [AllowAnonymous]
+        [Route("validate-account/{accountId}")]
+        [HttpGet]
+        public IActionResult ValidateAccount(string accountId, [FromQuery] string validationToken)
+        {
+            return Redirect(
+                $"{_appConfig.UiHost}:{_appConfig.UiPort}/{_appConfig.UiAccountValidationSuccessPath}"
+            );
         }
 
         [AllowAnonymous]
@@ -37,6 +53,10 @@ namespace CoreDuiWebApi.Controllers
             
             if(registerUserResult.UserCreated)
             {
+                await _emailTemplates.BuildAndSendValidateEmail(
+                    registerUserResult.EmailAddress,
+                    registerUserResult.UserId.ToString(),
+                    registerUserResult.ValidationToken.ToString());
                 return Ok();
             }
             else

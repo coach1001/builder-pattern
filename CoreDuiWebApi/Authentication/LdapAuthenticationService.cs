@@ -18,9 +18,9 @@ namespace CoreDuiWebApi.Authentication
     {
         private readonly LdapConfig _ldapConfig;
         private readonly JwtConfig _jwtConfig;
-        private readonly DbUserContext _context;
+        private readonly DbLabCalcContext _context;
 
-        public LdapAuthenticationService(IOptions<LdapConfig> ldapConfig, IOptions<JwtConfig> jwtConfig, DbUserContext context)
+        public LdapAuthenticationService(IOptions<LdapConfig> ldapConfig, IOptions<JwtConfig> jwtConfig, DbLabCalcContext context)
         {
             _ldapConfig = ldapConfig.Value;
             _jwtConfig = jwtConfig.Value;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoreDui.Definitions
 {
@@ -9,6 +10,6 @@ namespace CoreDui.Definitions
         public string System { get; set; }
         public string ModuleName { get; set; }
         public string Route { get; set; }
-        public FlowDefinition Flow { get; set; }
+        public FlowDefinition Flow { get; set; }        
     }
 }

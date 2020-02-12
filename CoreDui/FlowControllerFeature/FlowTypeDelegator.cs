@@ -36,7 +36,6 @@ namespace CoreDui.FlowControllerFeature
             var result = new object[attributes.Length + 1];
             attributes.CopyTo(result, 0);
             result[attributes.Length] = _attribute;
-
             return result;
         }
 

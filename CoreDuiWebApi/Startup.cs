@@ -113,15 +113,12 @@ namespace CoreDuiWebApi
                 });
             });
 
-            services.AddDbContext<DbUserContext>(o =>
-            {
-                o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            services.AddDbContext<DbLabCalcContext>(o => 
+            { o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
 
-            
             services.Configure<LdapConfig>(Configuration.GetSection("Ldap"));
             services.Configure<JwtConfig>(Configuration.GetSection("Jwt"));
-            services.Configure<SmtpConfig>(Configuration.GetSection("Smtp.Gmail"));
+            services.Configure<SmtpConfig>(Configuration.GetSection("Smtp"));
             services.Configure<AppConfig>(Configuration.GetSection("App"));
 
             services.AddScoped<IEmailClient, GmailEmailClient>();

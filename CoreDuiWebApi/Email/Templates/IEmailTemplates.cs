@@ -8,7 +8,7 @@ namespace CoreDuiWebApi.Email.Templates
 {
     public interface IEmailTemplates
     {
-        MailMessage BuildValidateEmail(string recipientEmailAddress, string validateToken);
-        MailMessage BuildResetPasswordEmail(string recipientEmailAddress, string resetPasswordToken);
+        Task BuildAndSendValidateEmail(string recipientEmailAddress, string accountId, string validateToken);
+        Task BuildAndSendResetPasswordEmail(string recipientEmailAddress, string accountId, string resetPasswordToken);
     }
 }

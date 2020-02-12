@@ -14,9 +14,9 @@ namespace CoreDuiWebApi.Authentication
     public class DbAuthenticationService : IAuthenticationService<DbUserClient>
     {        
         private readonly JwtConfig _jwtConfig;
-        private readonly DbUserContext _context;
+        private readonly DbLabCalcContext _context;
 
-        public DbAuthenticationService(IOptions<JwtConfig> jwtConfig, DbUserContext context)
+        public DbAuthenticationService(IOptions<JwtConfig> jwtConfig, DbLabCalcContext context)
         {            
             _jwtConfig = jwtConfig.Value;
             _context = context;
@@ -99,6 +99,9 @@ namespace CoreDuiWebApi.Authentication
             await _context.SaveChangesAsync();
             return new RegisterUserResult
             {
+                UserId = dbUserToCreate.Id,
+                EmailAddress = dbUserToCreate.EmailAddress,
+                ValidationToken = dbUserToCreate.ConfirmEmailToken,
                 UserCreated = true,
                 Reason = ""
             };

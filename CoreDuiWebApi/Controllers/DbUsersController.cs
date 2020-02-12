@@ -12,9 +12,9 @@ namespace CoreDuiWebApi.Controllers
     [ApiController]
     public class DbUsersController : ControllerBase
     {
-        private readonly DbUserContext _context;
+        private readonly DbLabCalcContext _context;
 
-        public DbUsersController(DbUserContext context)
+        public DbUsersController(DbLabCalcContext context)
         {
             _context = context;
         }

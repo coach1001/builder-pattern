@@ -14,8 +14,8 @@ namespace CoreDui.FlowControllerFeature
         {
             if (controller.ControllerType.GetGenericTypeDefinition() == typeof(FlowController<,>))
             {
-                var delegateInfo = (FlowDelegationType) controller.Attributes.FirstOrDefault(x => x.GetType() == typeof(FlowDelegationType));
-                controller.ControllerName = delegateInfo.Route;
+                var delegateInfo = (FlowDelegationType) controller.Attributes.FirstOrDefault(x => x.GetType() == typeof(FlowDelegationType));                
+                controller.ControllerName = delegateInfo.Route;                
                 controller.Properties.Add("Flow", delegateInfo);
             }
         }

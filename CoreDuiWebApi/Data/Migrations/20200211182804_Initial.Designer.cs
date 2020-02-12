@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoreDuiWebApi.Data.Migrations
 {
-    [DbContext(typeof(DbUserContext))]
+    [DbContext(typeof(DbLabCalcContext))]
     [Migration("20200211182804_Initial")]
     partial class Initial
     {
