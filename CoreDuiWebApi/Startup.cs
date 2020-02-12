@@ -6,6 +6,7 @@ using CoreDui.Repositories;
 using CoreDuiWebApi.Authentication;
 using CoreDuiWebApi.Authentication.DbUserEf;
 using CoreDuiWebApi.Email;
+using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -120,11 +121,13 @@ namespace CoreDuiWebApi
             
             services.Configure<LdapConfig>(Configuration.GetSection("Ldap"));
             services.Configure<JwtConfig>(Configuration.GetSection("Jwt"));
-            services.Configure<GmailConfig>(Configuration.GetSection("Smtp.Gmail"));
+            services.Configure<SmtpConfig>(Configuration.GetSection("Smtp.Gmail"));
+            services.Configure<AppConfig>(Configuration.GetSection("App"));
 
             services.AddScoped<IEmailClient, GmailEmailClient>();
             services.AddScoped<IAuthenticationService<LdapUser>, LdapAuthenticationService>();
             services.AddScoped<IAuthenticationService<DbUserClient>, DbAuthenticationService>();
+            services.AddScoped<IEmailTemplates, EmailTemplates>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

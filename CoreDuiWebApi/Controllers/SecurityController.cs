@@ -32,8 +32,18 @@ namespace CoreDuiWebApi.Controllers
             {
                 return BadRequest(new { message = "Passwords do not match." });
             }
-            await _authDbService.RegisterUser(registerUser);
-            return Ok();
+
+            var registerUserResult = await _authDbService.RegisterUser(registerUser);
+            
+            if(registerUserResult.UserCreated)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(new { message = registerUserResult.Reason });
+            }
+            
         }
 
         [AllowAnonymous]

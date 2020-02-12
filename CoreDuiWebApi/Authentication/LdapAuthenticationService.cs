@@ -118,7 +118,7 @@ namespace CoreDuiWebApi.Authentication
             throw new NotImplementedException();
         }
 
-        Task IAuthenticationService<LdapUser>.RegisterUser(RegisterUser user)
+        public Task<RegisterUserResult> RegisterUser(RegisterUser user)
         {
             throw new NotImplementedException();
         }

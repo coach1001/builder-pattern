@@ -8,9 +8,9 @@ namespace CoreDuiWebApi.Email
 {
     public class GmailEmailClient : IEmailClient
     {
-        private readonly GmailConfig _smtpConfig;
+        private readonly SmtpConfig _smtpConfig;
 
-        public GmailEmailClient(IOptions<GmailConfig> smtpConfig)
+        public GmailEmailClient(IOptions<SmtpConfig> smtpConfig)
         {
             _smtpConfig = smtpConfig.Value;
         }

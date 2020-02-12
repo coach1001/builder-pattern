@@ -15,6 +15,7 @@ namespace CoreDuiWebApi.Authentication.DbUserEf
         public string ProviderType { get; set; }
         public string Name { get; private set; }
         public string DisplayName { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
@@ -23,9 +24,10 @@ namespace CoreDuiWebApi.Authentication.DbUserEf
         public DateTime ConfirmEmailTokenExpiresAt { get; set; }
         public Guid RefreshToken { get; set; }
         public DateTime RefreshTokenExpiresAt { get; set; }
-
         public string Hash { get; set; }
         public string Salt { get; set; }
+        public Guid ResetPasswordToken { get; set; }
+        public DateTime ResetPasswordTokenExpiresAt { get; set; }
 
     }
 }

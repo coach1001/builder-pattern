@@ -6,9 +6,8 @@ namespace CoreDuiWebApi.Authentication
     public interface IAuthenticationService<TResult>
     {
         Task<TResult> Login(string uid, string password);
-        
         TResult CreateToken(TResult user);
         TResult CreateToken(DbUser user);
-        Task RegisterUser(RegisterUser user);
+        Task<RegisterUserResult> RegisterUser(RegisterUser user);
     }
 }

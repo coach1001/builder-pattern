@@ -72,8 +72,17 @@ namespace CoreDuiWebApi.Authentication
             throw new NotImplementedException();
         }
 
-        public async Task RegisterUser(RegisterUser user)
+        public async Task<RegisterUserResult> RegisterUser(RegisterUser user)
         {
+            var emailAlreadyRegisteredUser = await _context.DbUsers.Where(x => x.EmailAddress == user.EmailAddress).ToListAsync();
+            if (emailAlreadyRegisteredUser != null && emailAlreadyRegisteredUser.Count > 0)
+            {
+                return new RegisterUserResult
+                {
+                    UserCreated = false,
+                    Reason = $"User already registered with {user.EmailAddress}."
+                };
+            }
             var saltedHash = SaltedHash.Generate(64, user.Password);
             var dbUserToCreate = new DbUser
             {
@@ -88,6 +97,11 @@ namespace CoreDuiWebApi.Authentication
             };
             _context.DbUsers.Add(dbUserToCreate);
             await _context.SaveChangesAsync();
+            return new RegisterUserResult
+            {
+                UserCreated = true,
+                Reason = ""
+            };
         }
     }
 }
