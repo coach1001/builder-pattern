@@ -33,7 +33,7 @@ namespace CoreDui.Builders
             Flow.TaskPath = typeof(TFlowDataType).Name.FirstCharToLower();
             Flow.DataType = typeof(TFlowDataType);
             Flow.ContextType = typeof(TContextType);
-            Flow.FlowName = name;
+            Flow.Flow = name;
             Flow.Steps = new List<Element>();
         }
 

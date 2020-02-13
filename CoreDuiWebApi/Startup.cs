@@ -8,6 +8,7 @@ using CoreDuiWebApi.Authentication.DbUserEf;
 using CoreDuiWebApi.Email;
 using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
+using CoreDuiWebApi.Flow.UserRegistration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,8 +47,10 @@ namespace CoreDuiWebApi
 
             validationMapper.AddValidator("MaxLengthAttribute", CustomAttribuesJsConverters.MaxLengthJsConverter);
 
-            TestFlow1.RegisterFlow(moduleBuilder);
-            TestFlow2.RegisterFlow(moduleBuilder);
+            // TestFlow1.RegisterFlow(moduleBuilder);
+            // TestFlow2.RegisterFlow(moduleBuilder);
+
+            UserRegistrationFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
             {

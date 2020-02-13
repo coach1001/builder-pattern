@@ -44,7 +44,7 @@ namespace CoreDui.Builders
                 {
                     Route = route,
                     System = system,
-                    ModuleName = moduleName,
+                    Module = moduleName,
                     Flows = new List<FlowDefinition>
                     {
                         flow

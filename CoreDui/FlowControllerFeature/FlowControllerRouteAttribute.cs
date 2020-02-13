@@ -8,7 +8,7 @@ using CoreDui.Definitions;
 namespace CoreDui.FlowControllerFeature
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class FlowControllerNameAttribute : Attribute, IControllerModelConvention
+    public class FlowControllerRouteAttribute : Attribute, IControllerModelConvention
     {
         public void Apply(ControllerModel controller)
         {

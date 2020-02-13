@@ -11,7 +11,8 @@ namespace CoreDui.Enums
         Number,
         Select,
         MultiSelect,
-        DateTime
+        DateTime,
+        HideableText
     }
 
 }

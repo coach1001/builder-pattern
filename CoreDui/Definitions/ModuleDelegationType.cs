@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CoreDui.Definitions
 {
-    public class FlowDelegationType
+    public class ModuleDelegationType
     {     
         public string System { get; set; }
         public string Module { get; set; }
         public string Route { get; set; }
-        public FlowDefinition FlowDefinition { get; set; }        
+        public ModuleDefinition ModuleDefinition { get; set; }        
     }
 }

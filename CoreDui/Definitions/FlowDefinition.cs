@@ -8,7 +8,7 @@ namespace CoreDui.Definitions
 {
     public class FlowDefinition
     {
-        public string FlowName { get; set; }    
+        public string Flow { get; set; }    
 
         public string TaskPath { get; set; }
         
