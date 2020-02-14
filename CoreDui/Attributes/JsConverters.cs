@@ -15,10 +15,7 @@ namespace CoreDui.Attributes
             var validator = new ValidatorData
             {
                 Name = "required",
-                Metadata = new Dictionary<string, object>
-                        {
-                            { "required", true }
-                        }
+                Metadata = new Dictionary<string, object>()
             };
             return validator;
         }
@@ -64,6 +61,17 @@ namespace CoreDui.Attributes
                     {
                         { "length", attr.Length }
                     }
+            };
+            return validator;
+        }
+
+        public static ValidatorData EmailAddressJsConverter(object vObject)
+        {
+            var attr = (EmailAddressAttribute)vObject;
+            var validator = new ValidatorData
+            {
+                Name = "emailAddress",
+                Metadata = new Dictionary<string, object>()
             };
             return validator;
         }

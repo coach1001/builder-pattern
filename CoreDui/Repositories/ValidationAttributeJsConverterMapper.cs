@@ -16,6 +16,7 @@ namespace CoreDui.Repositories
             AddValidator("MustMatchAttribute", AttributesJsConverters.MustMatchJsConverter);
             AddValidator("RequiredIfAttribute", AttributesJsConverters.RequiredIfJsConverter);
             AddValidator("MinLengthAttribute", AttributesJsConverters.MinLengthJsConverter);
+            AddValidator("EmailAddressAttribute", AttributesJsConverters.EmailAddressJsConverter);
         }
 
         public void AddValidator(string name, Func<object, ValidatorData> function)
