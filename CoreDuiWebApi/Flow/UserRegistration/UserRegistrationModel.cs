@@ -7,6 +7,7 @@ namespace CoreDuiWebApi.Flow.UserRegistration
     public class UserRegistrationModel
     {        
         public UserRegistrationDetails UserRegistrationDetails { get; set; }
+        public object RegistrationDone { get; set; }
     }
 
     public class UserRegistrationDetails

@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace CoreDuiWebApi
@@ -62,8 +63,9 @@ namespace CoreDuiWebApi
             {
                 j.SerializerSettings.ContractResolver = new DefaultContractResolver
                 {
-                    NamingStrategy = new CamelCaseNamingStrategy()
+                    NamingStrategy = new CamelCaseNamingStrategy()                    
                 };
+                j.SerializerSettings.Converters.Add(new StringEnumConverter { NamingStrategy = new CamelCaseNamingStrategy() });                
                 j.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 j.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
