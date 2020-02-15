@@ -121,6 +121,14 @@ namespace CoreDui.Builders
             return this;            
         }
 
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            WithLayout(int stretchLarge, int stretchSmall)
+        {
+            Element.Layout.StretchLarge = stretchLarge;
+            Element.Layout.StretchSmall = stretchSmall;
+            return this;
+        }
+
         public TParentType End()
         {
             return Parent;

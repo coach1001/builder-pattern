@@ -66,6 +66,22 @@ namespace CoreDui.Builders
             return this;
         }
 
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithOptions(ICollection<SelectOption> options)
+        {
+            Element.Options = new List<SelectOption>(options);            
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithLayout(int stretchLarge, int stretchSmall)
+        {
+            Element.Layout.StretchLarge = stretchLarge;
+            Element.Layout.StretchSmall = stretchSmall;
+            return this;
+        }
+
         public TParentType End()
         {
             return Parent;
