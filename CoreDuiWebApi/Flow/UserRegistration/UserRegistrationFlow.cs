@@ -12,12 +12,12 @@ namespace CoreDuiWebApi.Flow.UserRegistration
         {
             var flow = moduleBuilder
                 .WithFlow<UserRegistrationModel, UserRegistrationContext>("user-registration")
-                    .WithStep(m => m.UserRegistrationDetails, "details")                        
+                    .WithStep(m => m.UserRegistrationDetails, "details", "create")                        
                         .AddControl(m => m.EmailAddress, "Email address", ControlType.Text)
                             .WithLayout(50, 100)
                         .End()
                         .AddControl(m => m.MobilePrefix, "Prefix", ControlType.Select)                            
-                            .WithLayout(20, 20)
+                            .WithLayout(20, 40)
                             .WithOptions(new List<SelectOption>
                             {
                                 new SelectOption { Key = "27", Display = "+27" },
@@ -25,7 +25,7 @@ namespace CoreDuiWebApi.Flow.UserRegistration
                             })
                         .End()
                         .AddControl(m => m.MobileNumber, "Mobile number", ControlType.Number)
-                            .WithLayout(30, 80)
+                            .WithLayout(30, 60)
                         .End()
                         .AddControl(m => m.FirstName, "First name", ControlType.Text)
                             .WithLayout(50, 100)
@@ -40,7 +40,7 @@ namespace CoreDuiWebApi.Flow.UserRegistration
                             .WithLayout(50, 100)
                         .End()
                     .End()
-                    .WithStep(m => m.RegistrationDone, "done")
+                    .WithStep(m => m.RegistrationDone, "done", "done")
                     .End();                    
             moduleBuilder.AddFlowToModule("", "portal", "account", flow.Flow);
         }

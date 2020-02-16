@@ -29,7 +29,8 @@ namespace CoreDui.Definitions
         public Type DataType { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<SelectOption> Options { get; set; }
-
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string Icon { get; set; }
     }
 
 }

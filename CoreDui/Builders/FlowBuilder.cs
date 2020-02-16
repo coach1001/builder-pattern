@@ -38,7 +38,7 @@ namespace CoreDui.Builders
         }
 
         public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TDerived, TContextType> 
-            WithStep<TDerived>(Expression<Func<TFlowDataType, TDerived>> property, string name = null)
+            WithStep<TDerived>(Expression<Func<TFlowDataType, TDerived>> property, string name = null, string icon = null)
         {
             var expression = (MemberExpression)property.Body;
             var attrs = expression.Member.GetCustomAttributes(false);
@@ -53,6 +53,8 @@ namespace CoreDui.Builders
             builder.Element.TaskPath = $"{Flow.TaskPath}.{modelProperty}";
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
+            builder.Element.Icon = icon;
+
             if (validators != null)
             {
                 builder.Element.Validators = validators;
