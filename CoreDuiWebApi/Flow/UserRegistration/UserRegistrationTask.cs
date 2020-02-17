@@ -14,7 +14,16 @@ namespace CoreDuiWebApi.Flow.UserRegistration
             var data = taskData.Data as UserRegistrationModel;
             var context = taskData.Context as UserRegistrationContext;
 
+            if(context == null)
+            {
+                context = new UserRegistrationContext();
+            }
+
             context.UpdatedAt = DateTime.Now.ToUniversalTime();
+            context.EmailAddress = data.UserRegistrationDetails.EmailAddress;
+
+            taskData.Data = (TFlowDataType)Convert.ChangeType(data, typeof(TFlowDataType));
+            taskData.Context = (TContextType)Convert.ChangeType(context, typeof(TContextType));
             return Task.FromResult(taskData);
         }
     }

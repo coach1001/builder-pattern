@@ -11,16 +11,6 @@ namespace CoreDui.FlowControllerFeature
     [Route("[controller]")]
     public class FlowController<TFlowDataType, TContextType> : ControllerBase
     {
-        /*[HttpGet("definition")]
-        public IActionResult IndexAsync()
-        {
-            var flow = 
-                (FlowDelegationType) ControllerContext.ActionDescriptor.Properties
-                .FirstOrDefault(x => x.Key.ToString() == "Flow").Value;
-            
-            return Ok(flow);
-        }*/
-
         [HttpPost("run-task")]
         public async System.Threading.Tasks.Task<IActionResult> PostTaskAsync([FromBody] TaskData<TFlowDataType, TContextType> taskData)
         {           

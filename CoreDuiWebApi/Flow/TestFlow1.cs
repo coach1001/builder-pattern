@@ -16,7 +16,6 @@ namespace CoreDuiWebApi.Flow
                     .WithStep(m => m.Step1)
                         .AddControl(m => m.Password)
                             .SetControlType(ControlType.Text)
-                            .WithTask<SimpleTask>(TaskTypeEnum.OnChange)
                         .End()
                         .AddControl(m => m.ConfirmPassword)
                             .SetControlType(ControlType.Text)
@@ -31,7 +30,6 @@ namespace CoreDuiWebApi.Flow
                         .End()
                         .AddArray(m => m.Kids)
                             .AddControl(m => m.Name)
-                                .WithTask<SimpleTask>(TaskTypeEnum.OnBack)
                             .End()
                         .End()
                     .End();

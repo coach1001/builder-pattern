@@ -10,7 +10,7 @@ namespace CoreDui.TaskHandling
     public class FlowTaskHandler : IFlowTask
     {
         public TaskTypeEnum TaskType { get; set;}
-        public virtual Task<TaskData<TFlowDataType, TContextType>> Run<TFlowDataType, TContextType>(TaskData<TFlowDataType, TContextType> taskData)            
+        public virtual Task<TaskData<TFlowDataType, TContextType>> Run<TFlowDataType, TContextType>(TaskData<TFlowDataType, TContextType> taskData)         
         {
             return Task.FromResult(taskData);
         }

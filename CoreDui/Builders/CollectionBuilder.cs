@@ -6,6 +6,7 @@ using CoreDui.Repositories;
 using CoreDui.Extensions;
 using CoreDui.Utils;
 using CoreDui.Enums;
+using CoreDui.TaskHandling;
 
 namespace CoreDui.Builders
 {
@@ -126,6 +127,32 @@ namespace CoreDui.Builders
         {
             Element.Layout.StretchLarge = stretchLarge;
             Element.Layout.StretchSmall = stretchSmall;
+            return this;
+        }
+
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Back(string text)
+        {
+            Element.BackButton = text;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Next(string text)
+        {
+            Element.NextButton = text;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            WithTask<TFlowTask>(TaskTypeEnum type) where TFlowTask : IFlowTask, new()
+        {
+            if (Element.Tasks == null)
+            {
+                Element.Tasks = new List<IFlowTask>();
+            }
+            var task = new TFlowTask();
+            task.SetTaskType(type);
+            Element.Tasks.Add(task);
             return this;
         }
 

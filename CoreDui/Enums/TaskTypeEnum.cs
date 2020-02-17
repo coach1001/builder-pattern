@@ -7,12 +7,9 @@ namespace CoreDui.Enums
     public enum TaskTypeEnum
     {
         PreTask,
-        PostTask,
         PeriTask,
-        OnNext,
-        OnBack,
-        OnSave,
-        OnChange
+        PostTask,
+        SaveTask
     }
 
 }

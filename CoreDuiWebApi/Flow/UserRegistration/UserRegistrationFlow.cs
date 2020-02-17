@@ -12,7 +12,8 @@ namespace CoreDuiWebApi.Flow.UserRegistration
         {
             var flow = moduleBuilder
                 .WithFlow<UserRegistrationModel, UserRegistrationContext>("user-registration")
-                    .WithStep(m => m.UserRegistrationDetails, "details", "create")                        
+                    .WithStep(m => m.UserRegistrationDetails, "details", "create")    
+                        .Next("Register")
                         .AddControl(m => m.EmailAddress, "Email address", ControlType.Text)
                             .WithLayout(50, 100)
                         .End()
@@ -39,8 +40,10 @@ namespace CoreDuiWebApi.Flow.UserRegistration
                         .AddControl(m => m.ConfirmPassword, "Confirm password", ControlType.HideableText)
                             .WithLayout(50, 100)
                         .End()
+                        .WithTask<UserRegistrationTask>(TaskTypeEnum.PostTask)
                     .End()
                     .WithStep(m => m.RegistrationDone, "done", "done")
+                        .Next("Done")
                     .End();                    
             moduleBuilder.AddFlowToModule("", "portal", "account", flow.Flow);
         }

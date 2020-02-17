@@ -37,7 +37,7 @@ namespace CoreDuiWebApi.Email
                     Reason = ""
                 };
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 client.Dispose();
                 return new SendEmailResult

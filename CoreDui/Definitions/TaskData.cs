@@ -5,6 +5,7 @@ using CoreDui.Enums;
 
 namespace CoreDui.Definitions
 {
+    public class BaseModel { }
     public class TaskData<TFlowDataType, TContextType>
     {
         public TFlowDataType Data { get; set; }
