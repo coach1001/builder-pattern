@@ -144,14 +144,19 @@ namespace CoreDui.Builders
         }
 
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            WithTask<TFlowTask>(TaskTypeEnum type) where TFlowTask : IFlowTask, new()
+            WithTask<TFlowTask>(TaskTypeEnum type)
+            where TFlowTask : IFlowTask<TFlowDataType, TContextType>
         {
             if (Element.Tasks == null)
             {
-                Element.Tasks = new List<IFlowTask>();
+                Element.Tasks = new List<TaskDefinition>();
             }
-            var task = new TFlowTask();
-            task.SetTaskType(type);
+            var task = new TaskDefinition
+            {
+                Type = typeof(TFlowTask),
+                TaskType = type,
+                RequiresValidDateToExecute = false
+            };            
             Element.Tasks.Add(task);
             return this;
         }

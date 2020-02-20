@@ -8,9 +8,9 @@ namespace CoreDui.Utils
 {
     public static class TaskSearch
     {        
-        public static ICollection<IFlowTask> Search(FlowDefinition flowDefinition, string taskPath, TaskTypeEnum taskType)
+        public static ICollection<TaskDefinition> Search(FlowDefinition flowDefinition, string taskPath, TaskTypeEnum taskType)
         {
-            ICollection<IFlowTask> tasks = null;
+            ICollection<TaskDefinition> tasks = null;
 
             if(flowDefinition.TaskPath == taskPath)
             {
@@ -30,7 +30,7 @@ namespace CoreDui.Utils
             return tasks;
         }
 
-        private static ICollection<IFlowTask> RecurseElement(ICollection<IFlowTask> tasks, Element elementIn, string taskPath, TaskTypeEnum taskType)
+        private static ICollection<TaskDefinition> RecurseElement(ICollection<TaskDefinition> tasks, Element elementIn, string taskPath, TaskTypeEnum taskType)
         {
             if(elementIn.TaskPath == taskPath)
             {

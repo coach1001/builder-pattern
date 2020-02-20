@@ -34,7 +34,7 @@ namespace CoreDui.Definitions
         public ICollection<ValidatorData> Validators { get; set; }
         
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<IFlowTask> Tasks { get; set; }
+        public ICollection<TaskDefinition> Tasks { get; set; }
         
         [JsonIgnore]        
         public Type DataType { get; set; }

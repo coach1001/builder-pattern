@@ -33,6 +33,8 @@ namespace CoreDuiWebApi
 
         public IConfiguration Configuration { get; }
 
+        public ILifetimeScope AutofacContainer { get; private set; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             var moduleRepo = new ModuleRepository();
@@ -47,9 +49,6 @@ namespace CoreDuiWebApi
             services.AddSingleton<IModuleRepository>(moduleRepo);
 
             validationMapper.AddValidator("MaxLengthAttribute", CustomAttribuesJsConverters.MaxLengthJsConverter);
-
-            // TestFlow1.RegisterFlow(moduleBuilder);
-            // TestFlow2.RegisterFlow(moduleBuilder);
 
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
 
@@ -137,7 +136,6 @@ namespace CoreDuiWebApi
             builder.RegisterModule(new AutofacModule());
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();

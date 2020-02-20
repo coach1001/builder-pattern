@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CoreDui.Builders;
 using CoreDui.Definitions;
 using CoreDui.Enums;
+using CoreDui.TaskHandling;
 
 namespace CoreDuiWebApi.Flow.UserRegistration
 {

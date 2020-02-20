@@ -7,10 +7,8 @@ using CoreDui.Enums;
 
 namespace CoreDui.TaskHandling
 {
-    public interface IFlowTask
+    public interface IFlowTask<TFlowDataType, TContextType>
     {
-        Task<TaskData<TFlowDataType, TContextType>> Run<TFlowDataType, TContextType>(TaskData<TFlowDataType, TContextType> data);
-        void SetTaskType(TaskTypeEnum taskType);
-        TaskTypeEnum GetTaskType();
+        Task<TaskData<TFlowDataType, TContextType>> Execute(TaskData<TFlowDataType, TContextType> data);        
     }
 }

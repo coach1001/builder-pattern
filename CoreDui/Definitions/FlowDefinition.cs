@@ -18,7 +18,7 @@ namespace CoreDui.Definitions
         [JsonIgnore]
         public Type ContextType { get; set; }
         
-        public ICollection<IFlowTask> Tasks { get; set; }
+        public ICollection<TaskDefinition> Tasks { get; set; }
 
         public ICollection<Element> Steps;
     }
