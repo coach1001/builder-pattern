@@ -26,7 +26,7 @@ namespace CoreDuiWebApi.Email.Templates
             var body = $"{_appConfig.Name} - Click link to validate and enable your account\n";
             
             body += 
-                $"\n {_appConfig.ApiHost}:{_appConfig.ApiPort.ToString()}/{_appConfig.ApiBasePath}" + 
+                $"\n {_appConfig.ApiHost}:{_appConfig.ApiPort.ToString()}/{_appConfig.ApiBasePath}/" + 
                 $"{_appConfig.ApiAccountValidatePath}/{accountId}?validationToken={validationToken} \n";
             
             body += "\nThank you\n";

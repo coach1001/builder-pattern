@@ -9,6 +9,6 @@ namespace CoreDui.TaskHandling
 {
     public interface IFlowTask<TFlowDataType, TContextType>
     {
-        Task<TaskData<TFlowDataType, TContextType>> Execute(TaskData<TFlowDataType, TContextType> data);        
+        Task<TaskData<TFlowDataType, TContextType>> Execute(TaskData<TFlowDataType, TContextType> taskData);        
     }
 }

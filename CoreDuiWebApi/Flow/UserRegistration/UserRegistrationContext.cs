@@ -6,7 +6,8 @@ namespace CoreDuiWebApi.Flow.UserRegistration
 {
     public class UserRegistrationContext : BaseContextModel
     {
-        public string EmailAddress { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public string RegistrationEmailAddress { get; set; }
+        public bool UserWithEmailAddressAlreadyExists { get; set; } = false;
+        public bool VerificationEmailSent { get; set; } = false;
     }
 }

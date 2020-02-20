@@ -28,11 +28,11 @@ namespace CoreDui.FlowControllerFeature
             {
 
             }
-            var flow =
-                (FlowDelegationType)ControllerContext.ActionDescriptor.Properties
+            var flow = (FlowDelegationType)ControllerContext.ActionDescriptor.Properties
                 .FirstOrDefault(x => x.Key.ToString() == "Flow").Value;
 
             var tasks = TaskSearch.Search(flow.FlowDefinition, taskData.TaskPath, taskData.TaskType);
+
             foreach(var task in tasks)
             {
                 var taskToExecute = (IFlowTask<TFlowDataType, TContextType>) _scope.Resolve(task.Type);
