@@ -7,7 +7,8 @@ namespace CoreDui.Builders
 {
     public interface IModuleBuilder
     {
-        FlowBuilder<TFlowDataType, TContextDataType> WithFlow<TFlowDataType, TContextDataType>(string name);
+        FlowBuilder<TFlowDataType, TContextDataType> WithFlow<TFlowDataType, TContextDataType>(string name)
+            where TContextDataType : BaseContextModel;
         void AddFlowToModule(string route, string system, string module, FlowDefinition definition);
     }
 }

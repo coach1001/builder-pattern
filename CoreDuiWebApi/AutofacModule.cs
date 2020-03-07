@@ -9,9 +9,9 @@ namespace CoreDuiWebApi
         protected override void Load(ContainerBuilder builder)
         {
             var currentAsm = System.Reflection.Assembly.GetExecutingAssembly();
-
+            builder.RegisterGeneric(typeof(DefaultFlowPersistanceTask<,>)).SingleInstance();
             builder.RegisterAssemblyTypes(currentAsm)
-                .AsClosedTypesOf(typeof(IFlowTask<,>)).SingleInstance();
+                .AsClosedTypesOf(typeof(IFlowTask<,>)).AsImplementedInterfaces();
         }
     }
 }

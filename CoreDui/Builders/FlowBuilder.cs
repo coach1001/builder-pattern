@@ -5,11 +5,13 @@ using CoreDui.Definitions;
 using CoreDui.Enums;
 using CoreDui.Extensions;
 using CoreDui.Repositories;
+using CoreDui.TaskHandling;
 using CoreDui.Utils;
 
 namespace CoreDui.Builders
 {
     public class FlowBuilder<TFlowDataType, TContextType> : IFlowBuilder
+        where TContextType : BaseContextModel
     {
         
         private readonly IElementTypeTemplateMapper _elementMapper;
@@ -54,6 +56,7 @@ namespace CoreDui.Builders
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
             builder.Element.Icon = icon;
+            builder.WithTask<DefaultFlowPersistanceTask<TFlowDataType, TContextType>>(TaskTypeEnum.PostTask);
 
             if (validators != null)
             {

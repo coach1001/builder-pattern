@@ -57,6 +57,10 @@ namespace CoreDui.Builders
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
             builder.Element.DataType = property.ReturnType;            
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
+            builder.Element.Tasks = new List<TaskDefinition>
+            {
+                
+            };
             if (validators != null)
             {
                 builder.Element.Validators = validators;

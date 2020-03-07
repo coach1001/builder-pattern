@@ -27,6 +27,7 @@ namespace CoreDui.Builders
         }
 
         public FlowBuilder<TFlowDataType, TContextDataType> WithFlow<TFlowDataType, TContextDataType>(string name)
+            where TContextDataType : BaseContextModel
         {
             return new FlowBuilder<TFlowDataType, TContextDataType>(_elementMapper, _controlMapper, _validationMapper, name);
         }

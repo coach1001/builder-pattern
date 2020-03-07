@@ -2,12 +2,13 @@ using System.Text;
 using Autofac;
 using CoreDui.Builders;
 using CoreDui.FlowControllerFeature;
+using CoreDui.Persistance;
 using CoreDui.Repositories;
 using CoreDuiWebApi.Authentication;
-using CoreDuiWebApi.Authentication.DbUserEf;
 using CoreDuiWebApi.Email;
 using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
+using CoreDuiWebApi.Flow.Account.UserLogin;
 using CoreDuiWebApi.Flow.UserRegistration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -42,15 +43,18 @@ namespace CoreDuiWebApi
             var controlMapper = new ControlTypeTemplateMapper();
             var validationMapper = new ValidationAttributeJsConverterMapper();
             var moduleBuilder = new ModuleBuilder(moduleRepo, elementMapper, controlMapper, validationMapper);
+            var inMemoryFlowPersistance = new InMemoryFlowPersistance();            
 
             services.AddSingleton<IElementTypeTemplateMapper>(elementMapper);
             services.AddSingleton<IControlTypeTemplateMapper>(controlMapper);
             services.AddSingleton<IValidationAttributeJsConverterMapper>(validationMapper);
             services.AddSingleton<IModuleRepository>(moduleRepo);
-
+            services.AddSingleton<IFlowPersistance>(inMemoryFlowPersistance);
+           
             validationMapper.AddValidator("MaxLengthAttribute", CustomAttribuesJsConverters.MaxLengthJsConverter);
 
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
+            UserLoginFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
             {

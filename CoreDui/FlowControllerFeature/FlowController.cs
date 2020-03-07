@@ -5,7 +5,7 @@ using CoreDui.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace CoreDui.FlowControllerFeature
 {        
@@ -22,7 +22,7 @@ namespace CoreDui.FlowControllerFeature
         }
 
         [HttpPost("run-task")]
-        public async System.Threading.Tasks.Task<IActionResult> PostTaskAsync([FromBody] TaskData<TFlowDataType, TContextType> taskData)
+        public async Task<TaskData<TFlowDataType, TContextType>> PostTaskAsync([FromBody] TaskData<TFlowDataType, TContextType> taskData)
         {           
             if(ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace CoreDui.FlowControllerFeature
                 taskData = await taskToExecute.Execute(taskData);                
             }
 
-            return Ok(taskData);
+            return taskData;
         }
 
     }
