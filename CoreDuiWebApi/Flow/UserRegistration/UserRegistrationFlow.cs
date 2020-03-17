@@ -46,7 +46,7 @@ namespace CoreDuiWebApi.Flow.UserRegistration
                     .WithStep(m => m.RegistrationDone, "done", "done")
                         .Next("Done")
                     .End();                    
-            moduleBuilder.AddFlowToModule("", "portal", "account", flow.Flow);
+            moduleBuilder.AddFlowToModule("", "lab-calculator", "account", flow.Flow);
         }
     }
 }

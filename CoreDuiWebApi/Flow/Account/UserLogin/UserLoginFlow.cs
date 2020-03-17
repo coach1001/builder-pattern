@@ -24,7 +24,7 @@ namespace CoreDuiWebApi.Flow.Account.UserLogin
                     .WithStep(m => m.LoginDone, "done", "done")
                         .Next("Done")
                     .End();                    
-            moduleBuilder.AddFlowToModule("", "portal", "account", flow.Flow);
+            moduleBuilder.AddFlowToModule("", "lab-calculator", "account", flow.Flow);
         }
     }
 }

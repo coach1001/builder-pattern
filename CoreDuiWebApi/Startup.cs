@@ -9,6 +9,7 @@ using CoreDuiWebApi.Email;
 using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
 using CoreDuiWebApi.Flow.Account.UserLogin;
+using CoreDuiWebApi.Flow.TMH1.A1;
 using CoreDuiWebApi.Flow.UserRegistration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -56,6 +57,8 @@ namespace CoreDuiWebApi
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
             UserLoginFlow.RegisterFlow(moduleBuilder);
 
+            A1Flow.RegisterFlow(moduleBuilder);
+
             services.AddControllers(c =>
             {
                 c.EnableEndpointRouting = false;
@@ -68,7 +71,10 @@ namespace CoreDuiWebApi
                 {
                     NamingStrategy = new CamelCaseNamingStrategy()                    
                 };
-                j.SerializerSettings.Converters.Add(new StringEnumConverter { NamingStrategy = new CamelCaseNamingStrategy() });                
+                j.SerializerSettings.Converters.Add(new StringEnumConverter 
+                {                     
+                    NamingStrategy = new CamelCaseNamingStrategy() 
+                });                
                 j.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 j.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });

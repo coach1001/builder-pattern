@@ -25,7 +25,7 @@ namespace CoreDui.Builders
             {
                 Name = name,
                 ElementType = elementType,
-                ControlType = controlType
+                ControlType = controlType,                
             };
         }
 
@@ -56,9 +56,31 @@ namespace CoreDui.Builders
             {
                 Type = typeof(TFlowTask),
                 TaskType = type,
-                RequiresValidDateToExecute = false
+                RequiresValidDataToExecute = false
             };
             Element.Tasks.Add(task);
+            return this;
+        }
+
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            ConfigSpans(
+                GridMediaSize gridMediaSize,
+                int colSpan,
+                int rowSpan
+            )
+        {
+            if(Element.GridConfig.SpanConfig == null)
+            {
+                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
+            }
+
+            Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
+            {
+                Columns = colSpan,
+                Rows = rowSpan
+            };
+
             return this;
         }
 
@@ -70,7 +92,6 @@ namespace CoreDui.Builders
             var output = linqString.sb.ToString();
             return this;
         }
-
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
             WithOptions(ICollection<SelectOption> options)

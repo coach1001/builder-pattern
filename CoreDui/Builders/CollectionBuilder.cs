@@ -10,22 +10,22 @@ using CoreDui.TaskHandling;
 
 namespace CoreDui.Builders
 {
-    public class CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> 
+    public class CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
     {
         public Element Element { get; set; }
         public TParentType Parent { get; set; }
-        
+
         private readonly IElementTypeTemplateMapper _elementMapper;
         private readonly IControlTypeTemplateMapper _controlMapper;
         private readonly IValidationAttributeJsConverterMapper _validationMapper;
 
-        public CollectionBuilder(TParentType parent, string name,            
+        public CollectionBuilder(TParentType parent, string name,
             IElementTypeTemplateMapper elementMapper,
             IControlTypeTemplateMapper controlMapper,
             IValidationAttributeJsConverterMapper validationMapper,
             ElementType elementType = ElementType.Object)
         {
-            Parent = parent;            
+            Parent = parent;
             _elementMapper = elementMapper;
             _controlMapper = controlMapper;
             _validationMapper = validationMapper;
@@ -34,7 +34,7 @@ namespace CoreDui.Builders
             {
                 Name = name,
                 ElementType = elementType,
-                DataType = typeof(TDataType),                
+                DataType = typeof(TDataType),
                 Elements = new List<Element>(),
                 UiTemplate = elementMapper.GetDefault(elementType),
                 ControlType = null
@@ -48,18 +48,18 @@ namespace CoreDui.Builders
             var attrs = expression.Member.GetCustomAttributes(false);
             var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
             var modelProperty = expression.Member.Name.FirstCharToLower();
-            name = name != null ? name : modelProperty;             
-            
+            name = name != null ? name : modelProperty;
+
             var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>
                 (this, name, _elementMapper, _controlMapper, _validationMapper);
 
             builder.Element.ModelProperty = modelProperty;
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
-            builder.Element.DataType = property.ReturnType;            
+            builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
             builder.Element.Tasks = new List<TaskDefinition>
             {
-                
+
             };
             if (validators != null)
             {
@@ -80,10 +80,10 @@ namespace CoreDui.Builders
 
             var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>(
                 this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Array);
-            
+
             builder.Element.ModelProperty = modelProperty;
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}[]";
-            builder.Element.DataType = property.ReturnType.GetGenericArguments()[0];            
+            builder.Element.DataType = property.ReturnType.GetGenericArguments()[0];
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Array);
             if (validators != null)
             {
@@ -93,9 +93,9 @@ namespace CoreDui.Builders
             return builder;
         }
 
-        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType,  TContextType>
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
             AddControl<TPropertyType>(Expression<Func<TDataType, TPropertyType>> property, string name = null, ControlType controlType = ControlType.Text)
-        {            
+        {
             var expression = (MemberExpression)property.Body;
             var attrs = expression.Member.GetCustomAttributes(false);
             var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
@@ -107,7 +107,7 @@ namespace CoreDui.Builders
 
             builder.Element.ModelProperty = modelProperty;
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
-            builder.Element.DataType = property.ReturnType;            
+            builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);
             if (validators != null)
             {
@@ -123,7 +123,7 @@ namespace CoreDui.Builders
             var linqString = new LinqJsString();
             linqString.Visit(ex);
             var output = linqString.sb.ToString();
-            return this;            
+            return this;
         }
 
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
@@ -133,7 +133,6 @@ namespace CoreDui.Builders
             Element.Layout.StretchSmall = stretchSmall;
             return this;
         }
-
 
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Back(string text)
         {
@@ -159,9 +158,49 @@ namespace CoreDui.Builders
             {
                 Type = typeof(TFlowTask),
                 TaskType = type,
-                RequiresValidDateToExecute = false
-            };            
+                RequiresValidDataToExecute = false
+            };
             Element.Tasks.Add(task);
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+           ConfigSpans(
+                GridMediaSize gridMediaSize,
+                int colSpan,
+                int rowSpan
+           )
+        {
+            if (Element.GridConfig.SpanConfig == null)
+            {
+                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
+            }
+
+            Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
+            {
+                Columns = colSpan,
+                Rows = rowSpan
+            };
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            ConfigTracks(
+                GridMediaSize gridMediaSize,
+                string columnsTrackConfig,
+                string rowsTrackConfig
+            )
+        {
+            if (Element.GridConfig.TrackConfig == null)
+            {
+                Element.GridConfig.TrackConfig = new Dictionary<string, TrackConfig>();
+            }
+
+            Element.GridConfig.TrackConfig[gridMediaSize.ToString().ToLower()] = new TrackConfig
+            {
+                Columns = columnsTrackConfig,
+                Rows = rowsTrackConfig
+            };
             return this;
         }
 

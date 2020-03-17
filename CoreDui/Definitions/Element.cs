@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoreDui.Enums;
-using CoreDui.Repositories;
-using CoreDui.TaskHandling;
 using Newtonsoft.Json;
 
 namespace CoreDui.Definitions
@@ -50,6 +48,8 @@ namespace CoreDui.Definitions
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string NextButton { get; set; } = null;
+
+        public GridConfig GridConfig { get; set; } = new GridConfig();
     }
 
 }
