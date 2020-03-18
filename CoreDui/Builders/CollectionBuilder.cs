@@ -126,14 +126,6 @@ namespace CoreDui.Builders
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            WithLayout(int stretchLarge, int stretchSmall)
-        {
-            Element.Layout.StretchLarge = stretchLarge;
-            Element.Layout.StretchSmall = stretchSmall;
-            return this;
-        }
-
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Back(string text)
         {
             Element.BackButton = text;
@@ -187,8 +179,8 @@ namespace CoreDui.Builders
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
             ConfigTracks(
                 GridMediaSize gridMediaSize,
-                string columnsTrackConfig,
-                string rowsTrackConfig
+                string columnsTrackConfig = "",
+                string rowsTrackConfig = ""
             )
         {
             if (Element.GridConfig.TrackConfig == null)

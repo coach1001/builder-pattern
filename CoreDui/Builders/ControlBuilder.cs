@@ -67,7 +67,7 @@ namespace CoreDui.Builders
             ConfigSpans(
                 GridMediaSize gridMediaSize,
                 int colSpan,
-                int rowSpan
+                int rowSpan = 1
             )
         {
             if(Element.GridConfig.SpanConfig == null)
@@ -97,14 +97,6 @@ namespace CoreDui.Builders
             WithOptions(ICollection<SelectOption> options)
         {
             Element.Options = new List<SelectOption>(options);            
-            return this;
-        }
-
-        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
-            WithLayout(int stretchLarge, int stretchSmall)
-        {
-            Element.Layout.StretchLarge = stretchLarge;
-            Element.Layout.StretchSmall = stretchSmall;
             return this;
         }
 

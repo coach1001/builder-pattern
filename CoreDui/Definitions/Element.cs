@@ -16,8 +16,6 @@ namespace CoreDui.Definitions
         public string UiTemplate { get; set; }
 
         public ElementType ElementType { get; set; }
-
-        public Layout Layout { get; set; } = new Layout();
         
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<Element> Elements { get; set; }
