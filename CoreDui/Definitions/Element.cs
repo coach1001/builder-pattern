@@ -22,7 +22,7 @@ namespace CoreDui.Definitions
         
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ControlType? ControlType { get; set; }
-        
+
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Metadata { get; set; }
         

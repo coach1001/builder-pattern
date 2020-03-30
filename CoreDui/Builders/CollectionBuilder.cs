@@ -7,6 +7,7 @@ using CoreDui.Extensions;
 using CoreDui.Utils;
 using CoreDui.Enums;
 using CoreDui.TaskHandling;
+using shortid;
 
 namespace CoreDui.Builders
 {
@@ -48,7 +49,7 @@ namespace CoreDui.Builders
             var attrs = expression.Member.GetCustomAttributes(false);
             var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
             var modelProperty = expression.Member.Name.FirstCharToLower();
-            name = name != null ? name : modelProperty;
+            // name = name != null ? name : modelProperty;
 
             var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>
                 (this, name, _elementMapper, _controlMapper, _validationMapper);
@@ -76,7 +77,7 @@ namespace CoreDui.Builders
             var attrs = expression.Member.GetCustomAttributes(false);
             var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
             var modelProperty = expression.Member.Name.FirstCharToLower();
-            name = name != null ? name : modelProperty;
+            // name = name != null ? name : modelProperty;
 
             var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>(
                 this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Array);
@@ -94,13 +95,13 @@ namespace CoreDui.Builders
         }
 
         public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
-            AddControl<TPropertyType>(Expression<Func<TDataType, TPropertyType>> property, string name = null, ControlType controlType = ControlType.Text)
+            AddControl<TPropertyType>(Expression<Func<TDataType, TPropertyType>> property, ControlType controlType = ControlType.Text, string name = null)
         {
             var expression = (MemberExpression)property.Body;
             var attrs = expression.Member.GetCustomAttributes(false);
             var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
             var modelProperty = expression.Member.Name.FirstCharToLower();
-            name = name != null ? name : modelProperty;
+            // name = name != null ? name : modelProperty;
 
             var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
                 this, name, _controlMapper, controlType);
@@ -113,6 +114,29 @@ namespace CoreDui.Builders
             {
                 builder.Element.Validators = validators;
             }
+            Element.Elements.Add(builder.Element);
+            return builder;
+        }
+
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
+            AddDecorator(string name, ControlType controlType = ControlType.Decorator)
+        {
+            
+            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
+                this, name, _controlMapper, controlType);
+            builder.Element.ModelProperty = ShortId.Generate(false, false, 14);
+            builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);
+            Element.Elements.Add(builder.Element);
+            return builder;
+        }
+
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
+            AddSpacer(ControlType controlType = ControlType.Spacer)
+        {
+            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
+                this, null, _controlMapper, controlType);
+            builder.Element.ModelProperty = ShortId.Generate(false, false, 14);
+            builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);            
             Element.Elements.Add(builder.Element);
             return builder;
         }
@@ -160,7 +184,7 @@ namespace CoreDui.Builders
            ConfigSpans(
                 GridMediaSize gridMediaSize,
                 int colSpan,
-                int rowSpan
+                int rowSpan = 1
            )
         {
             if (Element.GridConfig.SpanConfig == null)
@@ -173,6 +197,29 @@ namespace CoreDui.Builders
                 Columns = colSpan,
                 Rows = rowSpan
             };
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            ConfigSpans(
+                GridMediaSize[] gridMediaSizes,
+                int colSpan,
+                int rowSpan = 1
+            )
+        {
+            if (Element.GridConfig.SpanConfig == null)
+            {
+                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
+            }
+
+            foreach (GridMediaSize gridMediaSize in gridMediaSizes)
+            {
+                Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
+                {
+                    Columns = colSpan,
+                    Rows = rowSpan
+                };
+            }
             return this;
         }
 
@@ -193,6 +240,29 @@ namespace CoreDui.Builders
                 Columns = columnsTrackConfig,
                 Rows = rowsTrackConfig
             };
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            ConfigTracks(
+                GridMediaSize[] gridMediaSizes,
+                string columnsTrackConfig = "",
+                string rowsTrackConfig = ""
+            )
+        {
+            if (Element.GridConfig.TrackConfig == null)
+            {
+                Element.GridConfig.TrackConfig = new Dictionary<string, TrackConfig>();
+            }
+
+            foreach (GridMediaSize gridMediaSize in gridMediaSizes)
+            {
+                Element.GridConfig.TrackConfig[gridMediaSize.ToString().ToLower()] = new TrackConfig
+                {
+                    Columns = columnsTrackConfig,
+                    Rows = rowsTrackConfig
+                };
+            }            
             return this;
         }
 

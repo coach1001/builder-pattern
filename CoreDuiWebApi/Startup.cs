@@ -11,6 +11,7 @@ using CoreDuiWebApi.Flow;
 using CoreDuiWebApi.Flow.Account.UserLogin;
 using CoreDuiWebApi.Flow.Account.UserRegistration;
 using CoreDuiWebApi.Flow.TMH1.A1;
+using CoreDuiWebApi.Flow.TMH1.TestFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -58,6 +59,7 @@ namespace CoreDuiWebApi
             UserLoginFlow.RegisterFlow(moduleBuilder);
 
             A1Flow.RegisterFlow(moduleBuilder);
+            TestFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
             {

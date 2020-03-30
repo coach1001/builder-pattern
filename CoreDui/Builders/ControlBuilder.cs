@@ -45,6 +45,17 @@ namespace CoreDui.Builders
         }
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithMetadata(string key, object value)            
+        {
+            if (Element.Metadata == null)
+            {
+                Element.Metadata = new Dictionary<string, object>();
+            }
+            Element.Metadata[key] = value;
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
             WithTask<TFlowTask>(TaskTypeEnum type)
             where TFlowTask : IFlowTask<TFlowDataType, TContextType>
         {
@@ -81,6 +92,29 @@ namespace CoreDui.Builders
                 Rows = rowSpan
             };
 
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            ConfigSpans(
+                GridMediaSize[] gridMediaSizes,
+                int colSpan,
+                int rowSpan = 1
+            )
+        {
+            if (Element.GridConfig.SpanConfig == null)
+            {
+                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
+            }
+
+            foreach(GridMediaSize gridMediaSize in gridMediaSizes)
+            {
+                Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
+                {
+                    Columns = colSpan,
+                    Rows = rowSpan
+                };
+            }
             return this;
         }
 

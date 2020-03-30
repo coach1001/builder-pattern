@@ -19,6 +19,8 @@ namespace CoreDui.Repositories
             AddTemplate("defaultMultiselect", ControlType.MultiSelect, true);
             AddTemplate("defaultDatetime", ControlType.DateTime, true);
             AddTemplate("defaultHideableText", ControlType.HideableText, true);
+            AddTemplate("defaultDecorator", ControlType.Decorator, true);
+            AddTemplate("defaultSpacer", ControlType.Spacer, true);
         }
 
         public void AddTemplate(string templateName, ControlType controlType, bool default_ = false)

@@ -23,13 +23,20 @@ namespace CoreDui.Repositories
 
         public void AddFlowToExistingModule(string route, string system, string moduleName, FlowDefinition flow)
         {
-            Modules = Modules
+            foreach(ModuleDefinition m in Modules)
+            {
+                if(m.Route == route && m.System == system && m.Module == moduleName)
+                {
+                    m.Flows.Add(flow);
+                }
+            }
+            /*Modules = Modules
                 .Where(m => m.Route == route && m.System == system && m.Module == moduleName)
                 .Select(m =>
                 {
                     m.Flows.Add(flow);
                     return m;
-                }).ToList();
+                }).ToList();*/
         }
 
         public bool Exists(string route, string system, string moduleName)
