@@ -7,9 +7,13 @@ namespace CoreDui.Enums
     public enum BorderEnum
     {
         none,
-        ltrb,
+        ltrb,        
         lrb,
         trb,
-        rb
+        rb,
+        lr,
+        r,
+        ltr,
+        tr
     }
 }

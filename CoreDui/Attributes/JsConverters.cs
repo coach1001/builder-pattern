@@ -35,6 +35,21 @@ namespace CoreDui.Attributes
             return validator;
         }
 
+        public static ValidatorData RangeJsConverter(object vObject)
+        {
+            var attr = (RangeAttribute)vObject;
+            var validator = new ValidatorData
+            {
+                Name = "range",
+                Metadata = new Dictionary<string, object>
+                        {
+                            { "min", attr.Minimum },
+                            { "max", attr.Maximum }
+                        }
+            };
+            return validator;
+        }
+        
         public static ValidatorData RequiredIfJsConverter(object vObject)
         {
             var attr = (RequiredIfAttribute)vObject;
