@@ -45,14 +45,14 @@ namespace CoreDuiWebApi
             var controlMapper = new ControlTypeTemplateMapper();
             var validationMapper = new ValidationAttributeJsConverterMapper();
             var moduleBuilder = new ModuleBuilder(moduleRepo, elementMapper, controlMapper, validationMapper);
-            var inMemoryFlowPersistance = new InMemoryFlowPersistance();            
+            var inMemoryFlowPersistance = new InMemoryFlowPersistance();
 
             services.AddSingleton<IElementTypeTemplateMapper>(elementMapper);
             services.AddSingleton<IControlTypeTemplateMapper>(controlMapper);
             services.AddSingleton<IValidationAttributeJsConverterMapper>(validationMapper);
             services.AddSingleton<IModuleRepository>(moduleRepo);
             services.AddSingleton<IFlowPersistance>(inMemoryFlowPersistance);
-           
+            
             validationMapper.AddValidator("MaxLengthAttribute", CustomAttribuesJsConverters.MaxLengthJsConverter);
 
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
@@ -150,6 +150,7 @@ namespace CoreDuiWebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

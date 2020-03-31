@@ -73,6 +73,42 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithPrefix(string value, bool innerHtml = false)
+        {
+            if (Element.Prefix == null)
+            {
+                Element.Prefix = new AppendInput();
+            }
+            Element.Prefix.Value = value;
+            Element.Prefix.InnerHtml = innerHtml;
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithSuffix(string value, bool innerHtml = false)
+        {
+            if (Element.Suffix == null)
+            {
+                Element.Suffix = new AppendInput();
+            }
+            Element.Suffix.Value = value;
+            Element.Suffix.InnerHtml = innerHtml;
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            InitiallyDisabled(bool disabled = true)
+        {
+            Element.InitiallyDisabled = disabled;
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType> WithBorder(BorderEnum borderConfig)
+        {
+            Element.BorderConfig = borderConfig;
+            return this;
+        }
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
             ConfigSpans(

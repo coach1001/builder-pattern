@@ -48,6 +48,16 @@ namespace CoreDui.Definitions
         public string NextButton { get; set; } = null;
 
         public GridConfig GridConfig { get; set; } = new GridConfig();
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public AppendInput Prefix;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public AppendInput Suffix;
+        
+        public bool InitiallyDisabled = false;
+        
+        public BorderEnum BorderConfig = BorderEnum.none;
     }
 
 }

@@ -150,6 +150,12 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> WithBorder(BorderEnum borderConfig)
+        {
+            Element.BorderConfig = borderConfig;
+            return this;
+        }
+
         public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Back(string text)
         {
             Element.BackButton = text;
