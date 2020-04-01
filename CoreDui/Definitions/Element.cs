@@ -46,9 +46,7 @@ namespace CoreDui.Definitions
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string NextButton { get; set; } = null;
-
-        public GridConfig GridConfig { get; set; } = new GridConfig();
-
+       
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public AppendInput Prefix;
 
@@ -58,6 +56,13 @@ namespace CoreDui.Definitions
         public bool InitiallyDisabled = false;
         
         public BorderEnum BorderConfig = BorderEnum.none;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public GridConfig GridConfig;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public PositionConfig PositionConfig;
+
     }
 
 }

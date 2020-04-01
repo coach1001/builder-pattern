@@ -118,13 +118,47 @@ namespace CoreDui.Builders
             return builder;
         }
 
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> 
+            GridConfig(string column, string row = "", GridMediaSize mediaSize = GridMediaSize.Large)
+        {
+            if(mediaSize == GridMediaSize.Large)
+            {
+                Element.GridConfig = new GridConfig();
+                Element.GridConfig.Large = new MediaConfig
+                {
+                    MediaSize = GridMediaSize.Large,
+                    Column = column,
+                    Row = row
+                };
+            }
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+            PositionConfig(string column, string row, GridMediaSize mediaSize = GridMediaSize.Large)
+        {
+            if (mediaSize == GridMediaSize.Large)
+            {
+                Element.PositionConfig = new PositionConfig();
+                Element.PositionConfig.Large = new MediaConfig
+                {
+                    MediaSize = GridMediaSize.Large,
+                    Column = column,
+                    Row = row
+                };
+            }
+            return this;
+        }
+
         public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
             AddDecorator(string name, ControlType controlType = ControlType.Decorator)
         {
             
             var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
                 this, name, _controlMapper, controlType);
-            builder.Element.ModelProperty = ShortId.Generate(false, false, 14);
+            builder.Element.ModelProperty = null;
+            builder.Element.TaskPath = this.Element.TaskPath;
             builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);
             Element.Elements.Add(builder.Element);
             return builder;
@@ -183,92 +217,6 @@ namespace CoreDui.Builders
                 RequiresValidDataToExecute = false
             };
             Element.Tasks.Add(task);
-            return this;
-        }
-
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-           ConfigSpans(
-                GridMediaSize gridMediaSize,
-                int colSpan,
-                int rowSpan = 1
-           )
-        {
-            if (Element.GridConfig.SpanConfig == null)
-            {
-                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
-            }
-
-            Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
-            {
-                Columns = colSpan,
-                Rows = rowSpan
-            };
-            return this;
-        }
-
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            ConfigSpans(
-                GridMediaSize[] gridMediaSizes,
-                int colSpan,
-                int rowSpan = 1
-            )
-        {
-            if (Element.GridConfig.SpanConfig == null)
-            {
-                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
-            }
-
-            foreach (GridMediaSize gridMediaSize in gridMediaSizes)
-            {
-                Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
-                {
-                    Columns = colSpan,
-                    Rows = rowSpan
-                };
-            }
-            return this;
-        }
-
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            ConfigTracks(
-                GridMediaSize gridMediaSize,
-                string columnsTrackConfig = "",
-                string rowsTrackConfig = ""
-            )
-        {
-            if (Element.GridConfig.TrackConfig == null)
-            {
-                Element.GridConfig.TrackConfig = new Dictionary<string, TrackConfig>();
-            }
-
-            Element.GridConfig.TrackConfig[gridMediaSize.ToString().ToLower()] = new TrackConfig
-            {
-                Columns = columnsTrackConfig,
-                Rows = rowsTrackConfig
-            };
-            return this;
-        }
-
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            ConfigTracks(
-                GridMediaSize[] gridMediaSizes,
-                string columnsTrackConfig = "",
-                string rowsTrackConfig = ""
-            )
-        {
-            if (Element.GridConfig.TrackConfig == null)
-            {
-                Element.GridConfig.TrackConfig = new Dictionary<string, TrackConfig>();
-            }
-
-            foreach (GridMediaSize gridMediaSize in gridMediaSizes)
-            {
-                Element.GridConfig.TrackConfig[gridMediaSize.ToString().ToLower()] = new TrackConfig
-                {
-                    Columns = columnsTrackConfig,
-                    Rows = rowsTrackConfig
-                };
-            }            
             return this;
         }
 

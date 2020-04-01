@@ -49,7 +49,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
 
         public decimal? MassRetained19mm { get; set; }
         public decimal? PercRetained19mm { get; set; }
-        // public decimal? PercPassing19mm { get; set; }
+        public decimal? PercPassing19mm { get; set; }
 
         public decimal? MassRetained13_2mm { get; set; }
         public decimal? PercRetained13_2mm { get; set; }

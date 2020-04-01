@@ -104,53 +104,32 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            PositionConfig(string column, string row, GridMediaSize mediaSize = GridMediaSize.Large)
+        {
+            if (mediaSize == GridMediaSize.Large)
+            {
+                Element.PositionConfig = new PositionConfig();
+                Element.PositionConfig.Large = new MediaConfig
+                {
+                    MediaSize = GridMediaSize.Large,
+                    Column = column,
+                    Row = row
+                };
+            }
+            return this;      
+        }
+
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType> UiTemplate(string uiTemplate)
+        {
+            Element.UiTemplate = uiTemplate;
+            return this;
+        }
+
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType> WithBorder(BorderEnum borderConfig)
         {
             Element.BorderConfig = borderConfig;
-            return this;
-        }
-
-        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
-            ConfigSpans(
-                GridMediaSize gridMediaSize,
-                int colSpan,
-                int rowSpan = 1
-            )
-        {
-            if(Element.GridConfig.SpanConfig == null)
-            {
-                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
-            }
-
-            Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
-            {
-                Columns = colSpan,
-                Rows = rowSpan
-            };
-
-            return this;
-        }
-
-        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
-            ConfigSpans(
-                GridMediaSize[] gridMediaSizes,
-                int colSpan,
-                int rowSpan = 1
-            )
-        {
-            if (Element.GridConfig.SpanConfig == null)
-            {
-                Element.GridConfig.SpanConfig = new Dictionary<string, SpanConfig>();
-            }
-
-            foreach(GridMediaSize gridMediaSize in gridMediaSizes)
-            {
-                Element.GridConfig.SpanConfig[gridMediaSize.ToString().ToLower()] = new SpanConfig
-                {
-                    Columns = colSpan,
-                    Rows = rowSpan
-                };
-            }
             return this;
         }
 
