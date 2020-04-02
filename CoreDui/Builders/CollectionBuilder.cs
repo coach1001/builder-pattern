@@ -11,7 +11,7 @@ using shortid;
 
 namespace CoreDui.Builders
 {
-    public class CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+    public class CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
     {
         public Element Element { get; set; }
         public TParentType Parent { get; set; }
@@ -42,7 +42,7 @@ namespace CoreDui.Builders
             };
         }
 
-        public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>
+        public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
             AddGroup<TDerived>(Expression<Func<TDataType, TDerived>> property, string name = null)
         {
             var expression = (MemberExpression)property.Body;
@@ -51,7 +51,7 @@ namespace CoreDui.Builders
             var modelProperty = expression.Member.Name.FirstCharToLower();
             // name = name != null ? name : modelProperty;
 
-            var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>
+            var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
                 (this, name, _elementMapper, _controlMapper, _validationMapper);
 
             builder.Element.ModelProperty = modelProperty;
@@ -70,7 +70,7 @@ namespace CoreDui.Builders
             return builder;
         }
 
-        public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>
+        public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
             AddArray<TDerived>(Expression<Func<TDataType, ICollection<TDerived>>> property, string name = null)
         {
             var expression = (MemberExpression)property.Body;
@@ -79,7 +79,7 @@ namespace CoreDui.Builders
             var modelProperty = expression.Member.Name.FirstCharToLower();
             // name = name != null ? name : modelProperty;
 
-            var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDerived, TContextType>(
+            var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>(
                 this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Array);
 
             builder.Element.ModelProperty = modelProperty;
@@ -94,7 +94,7 @@ namespace CoreDui.Builders
             return builder;
         }
 
-        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>
             AddControl<TPropertyType>(Expression<Func<TDataType, TPropertyType>> property, ControlType controlType = ControlType.Text, string name = null)
         {
             var expression = (MemberExpression)property.Body;
@@ -103,7 +103,7 @@ namespace CoreDui.Builders
             var modelProperty = expression.Member.Name.FirstCharToLower();
             // name = name != null ? name : modelProperty;
 
-            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
+            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>(
                 this, name, _controlMapper, controlType);
 
             builder.Element.ModelProperty = modelProperty;
@@ -119,7 +119,7 @@ namespace CoreDui.Builders
         }
 
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> 
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
             GridConfig(string column, string row = "", GridMediaSize mediaSize = GridMediaSize.Large)
         {
             if(mediaSize == GridMediaSize.Large)
@@ -135,8 +135,8 @@ namespace CoreDui.Builders
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
-            PositionConfig(string column, string row, GridMediaSize mediaSize = GridMediaSize.Large)
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            PositionConfig(string column, string row = "", GridMediaSize mediaSize = GridMediaSize.Large)
         {
             if (mediaSize == GridMediaSize.Large)
             {
@@ -151,11 +151,11 @@ namespace CoreDui.Builders
             return this;
         }
 
-        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>
             AddDecorator(string name, ControlType controlType = ControlType.Decorator)
         {
             
-            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
+            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>(
                 this, name, _controlMapper, controlType);
             builder.Element.ModelProperty = null;
             builder.Element.TaskPath = this.Element.TaskPath;
@@ -164,10 +164,10 @@ namespace CoreDui.Builders
             return builder;
         }
 
-        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>
+        public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>
             AddSpacer(ControlType controlType = ControlType.Spacer)
         {
-            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>, TDataType, TContextType>(
+            var builder = new ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>(
                 this, null, _controlMapper, controlType);
             builder.Element.ModelProperty = ShortId.Generate(false, false, 14);
             builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);            
@@ -175,34 +175,61 @@ namespace CoreDui.Builders
             return builder;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
             WithReactivity<TCustomType>(Expression<Func<TCustomType, bool>> ex, ReactivityType reactivityType)
         {
             var linqString = new LinqJsString();
             linqString.Visit(ex);
             var output = linqString.sb.ToString();
+            if (Element.Reactivity == null)
+            {
+                Element.Reactivity = new List<ReactivityExpression>();
+            }
+            Element.Reactivity.Add(new ReactivityExpression
+            {
+                Expression = output,
+                Type = reactivityType
+            });
+            return this;            
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            WithReactivity(Expression<Func<TParentDataType, bool>> ex, ReactivityType reactivityType)
+        {
+            var linqString = new LinqJsString();
+            linqString.Visit(ex);
+            var output = linqString.sb.ToString();
+            if(Element.Reactivity == null)
+            {
+                Element.Reactivity = new List<ReactivityExpression>();
+            }
+            Element.Reactivity.Add(new ReactivityExpression
+            {
+                Expression = output,
+                Type = reactivityType
+            });
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> WithBorder(BorderEnum borderConfig)
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> WithBorder(BorderEnum borderConfig)
         {
             Element.BorderConfig = borderConfig;
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Back(string text)
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> Back(string text)
         {
             Element.BackButton = text;
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType> Next(string text)
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> Next(string text)
         {
             Element.NextButton = text;
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TDataType, TContextType>
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
             WithTask<TFlowTask>(TaskTypeEnum type)
             where TFlowTask : IFlowTask<TFlowDataType, TContextType>
         {

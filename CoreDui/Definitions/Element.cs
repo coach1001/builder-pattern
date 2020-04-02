@@ -63,6 +63,8 @@ namespace CoreDui.Definitions
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public PositionConfig PositionConfig;
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<ReactivityExpression> Reactivity;
     }
 
 }

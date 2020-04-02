@@ -39,7 +39,7 @@ namespace CoreDui.Builders
             Flow.Steps = new List<Element>();
         }
 
-        public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TDerived, TContextType> 
+        public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType> 
             WithStep<TDerived>(Expression<Func<TFlowDataType, TDerived>> property, string name = null, string icon = null)
         {
             var expression = (MemberExpression)property.Body;
@@ -48,7 +48,7 @@ namespace CoreDui.Builders
             var modelProperty = expression.Member.Name.FirstCharToLower();
             name = name != null ? name : modelProperty;
 
-            var builder = new CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TDerived, TContextType>
+            var builder = new CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType>
                 (this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Object);
 
             builder.Element.ModelProperty = modelProperty;

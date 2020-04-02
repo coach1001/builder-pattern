@@ -56,6 +56,42 @@ namespace CoreDui.Builders
         }
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithReactivity<TCustomType>(Expression<Func<TCustomType, bool>> ex, ReactivityType reactivityType)
+        {
+            var linqString = new LinqJsString();
+            linqString.Visit(ex);
+            var output = linqString.sb.ToString();
+            if (Element.Reactivity == null)
+            {
+                Element.Reactivity = new List<ReactivityExpression>();
+            }
+            Element.Reactivity.Add(new ReactivityExpression
+            {
+                Expression = output,
+                Type = reactivityType
+            });
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithReactivity(Expression<Func<TParentDataType, bool>> ex, ReactivityType reactivityType)
+        {
+            var linqString = new LinqJsString();
+            linqString.Visit(ex);
+            var output = linqString.sb.ToString();
+            if (Element.Reactivity == null)
+            {
+                Element.Reactivity = new List<ReactivityExpression>();
+            }
+            Element.Reactivity.Add(new ReactivityExpression
+            {
+                Expression = output,
+                Type = reactivityType
+            });
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
             WithTask<TFlowTask>(TaskTypeEnum type)
             where TFlowTask : IFlowTask<TFlowDataType, TContextType>
         {
@@ -105,7 +141,7 @@ namespace CoreDui.Builders
         }
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
-            PositionConfig(string column, string row, GridMediaSize mediaSize = GridMediaSize.Large)
+            PositionConfig(string column, string row = "", GridMediaSize mediaSize = GridMediaSize.Large)
         {
             if (mediaSize == GridMediaSize.Large)
             {
@@ -130,15 +166,6 @@ namespace CoreDui.Builders
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType> WithBorder(BorderEnum borderConfig)
         {
             Element.BorderConfig = borderConfig;
-            return this;
-        }
-
-        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType> 
-            WithReactivity(Expression<Func<TParentDataType, bool>> ex, ReactivityType reactivityType)
-        {        
-            var linqString = new LinqJsString();
-            linqString.Visit(ex);
-            var output = linqString.sb.ToString();
             return this;
         }
 

@@ -19,7 +19,9 @@ namespace CoreDui.Utils
                 case ExpressionType.Or:
                     return "||";                    
                 case ExpressionType.Equal:
-                    return "==";                    
+                    return "==";
+                case ExpressionType.Not:
+                    return "!";
                 case ExpressionType.NotEqual:
                     return "!=";                    
                 case ExpressionType.LessThan:

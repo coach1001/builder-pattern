@@ -148,8 +148,7 @@ namespace CoreDui.Utils
             {
                 //_stack.Push(c.Value);
                 //if (Type.GetTypeCode(c.Value.GetType()) == TypeCode.Object)
-                //    _stack.Pop();
-
+                //    _stack.Pop();                
                 switch (Type.GetTypeCode(c.Value.GetType()))
                 {
                     case TypeCode.Boolean:
@@ -183,7 +182,10 @@ namespace CoreDui.Utils
                 return base.Visit(node);
             }
             else
+            {
                 return base.Visit(node);
+            }
+                
         }
     }
 

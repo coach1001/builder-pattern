@@ -7,43 +7,60 @@ using CoreDui.Enums;
 
 namespace CoreDuiWebApi.Flow.TMH1.A1
 {
-    public class A1Flow
+    public class A1FlowOriginal
     {
         public static void RegisterFlow(IModuleBuilder moduleBuilder)
         {
             var flow = moduleBuilder
                 .WithFlow<A1Model, A1Context>("a1")
                     .WithStep(m => m.Data)
-                        .GridConfig("repeat(3,minmax(0,1fr))")
+                        .GridConfig("3fr 2fr 2fr 2fr", "repeat(22, minmax(71px, auto))")
                         .Next("Save")                        
                         .WithTask<A1CalculationTask>(TaskTypeEnum.PeriTask)                                                
                         .AddDecorator("TMH1 - A1")
-                            .PositionConfig("1/4", "1")
+                            .PositionConfig("1/5", "1")
                             .WithMetadata("textAlign", "center")
                             .WithMetadata("textWeight", "bold")
+                            .WithBorder(BorderEnum.ltrb)
                         .End()
-                        
-                        .AddControl(m => m.TotalSampleMass, ControlType.Number, "Total Sample Mass").WithSuffix("grams").PositionConfig("1", "2").End()                                                
-                        .AddControl(m => m.TotalRetainedOn19mm, ControlType.Number, "Total Retained 19mm Sieve").WithSuffix("grams").InitiallyDisabled().PositionConfig("1", "3").End()                                                
-                        .AddControl(m => m.RiffledDryMass, ControlType.Number, "Riffled Dry Mass ( < 19 mm)").WithSuffix("grams").PositionConfig("1", "4").End()                                                
-                        .AddControl(m => m.ReductionFactor, ControlType.Number, "Reduction factor").WithSuffix("factor").InitiallyDisabled().PositionConfig("1", "5").End()                        
-                        .AddControl(m => m.InitialSieve, ControlType.Number, "Initial Sieve (<0.425 mm)").WithSuffix("grams").PositionConfig("1", "6").End()                                                
-                        .AddControl(m => m.Washed, ControlType.Number, "Washed (<0.425 mm)").WithSuffix("grams").PositionConfig("1", "7").End()                                                
-                        .AddControl(m => m.Final, ControlType.Number, "Final (<0.425 mm)").WithSuffix("grams").PositionConfig("1", "8").End()
-                        
-                        .AddDecorator("Mass Retained").PositionConfig("1", "9").End()
-                        .AddDecorator("Percentage Retained").PositionConfig("2", "9").End()
-                        .AddDecorator("Percentage Passing").PositionConfig("3", "9").End()                        
-                        
-                        .AddControl(m => m.MassRetained105mm, ControlType.Number).WithPrefix("105 mm").WithSuffix("grams").PositionConfig("1", "10").End()
-                        .AddControl(m => m.PercRetained105mm, ControlType.Number).WithSuffix("%").InitiallyDisabled().PositionConfig("2", "10").End()
-                        .AddControl(m => m.PercPassing105mm, ControlType.Number).WithSuffix("%").InitiallyDisabled().PositionConfig("3", "10").End()                        
-                        
-                        .AddControl(m => m.MassRetained75mm, ControlType.Number).WithPrefix("75 mm").WithSuffix("grams").PositionConfig("1", "11").End()
-                        .AddControl(m => m.PercRetained75mm, ControlType.Number).WithSuffix("%").InitiallyDisabled().PositionConfig("2", "11").End()
-                        .AddControl(m => m.PercPassing75mm, ControlType.Number).WithSuffix("%").InitiallyDisabled().PositionConfig("3", "11").End()                        
 
-                        /*.AddDecorator("63 mm").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "12").End()
+                        .AddDecorator("Total Sample Mass").WithMetadata("textAlign", "right").WithBorder(BorderEnum.lr).PositionConfig("1/2", "2").End()
+                        .AddControl(m => m.TotalSampleMass, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.r).PositionConfig("2/3", "2").End()                        
+
+                        .AddDecorator("Total Retained 19mm Sieve").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "3").End()
+                        .AddControl(m => m.TotalRetainedOn19mm, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.tr).InitiallyDisabled().PositionConfig("2/3", "3").End()                        
+
+                        .AddDecorator("Riffled Dry Mass ( < 19 mm)").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "4").End()
+                        .AddControl(m => m.RiffledDryMass, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.tr).PositionConfig("2/3", "4").End()                        
+
+                        .AddDecorator("Reduction factor").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "5/5").End()
+                        .AddControl(m => m.ReductionFactor, ControlType.Number).WithSuffix("factor").WithBorder(BorderEnum.tr).InitiallyDisabled().PositionConfig("2/3", "5").End()                        
+
+                        .AddDecorator("Initial Sieve (<0.425 mm)").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "6").End()
+                        .AddControl(m => m.InitialSieve, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.tr).PositionConfig("2/3", "6").End()                        
+
+                        .AddDecorator("Washed (<0.425 mm)").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "7").End()
+                        .AddControl(m => m.Washed, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.tr).PositionConfig("2/3", "7").End()                        
+
+                        .AddDecorator("Final (<0.425 mm)").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "8").End()
+                        .AddControl(m => m.Final, ControlType.Number).WithSuffix("grams").WithBorder(BorderEnum.tr).PositionConfig("2/3", "8").End()
+
+                        .AddDecorator("Sieve Arpeture Size").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "9").End()
+                        .AddDecorator("Mass Retained").WithBorder(BorderEnum.tr).PositionConfig("2/3", "9").End()
+                        .AddDecorator("Percentage Retained").WithBorder(BorderEnum.tr).PositionConfig("3/4", "9").End()
+                        .AddDecorator("Percentage Passing").WithBorder(BorderEnum.tr).PositionConfig("4/5", "9").End()                        
+
+                        .AddDecorator("105 mm").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "10").End()
+                        .AddControl(m => m.MassRetained105mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("grams").PositionConfig("2/3", "10").End()
+                        .AddControl(m => m.PercRetained105mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").InitiallyDisabled().PositionConfig("3/4", "10").End()
+                        .AddControl(m => m.PercPassing105mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").InitiallyDisabled().PositionConfig("4/5", "10").End()                        
+
+                        .AddDecorator("75 mm").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "11").End()
+                        .AddControl(m => m.MassRetained75mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("grams").PositionConfig("2/3", "11").End()
+                        .AddControl(m => m.PercRetained75mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").InitiallyDisabled().PositionConfig("3/4", "11").End()
+                        .AddControl(m => m.PercPassing75mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").InitiallyDisabled().PositionConfig("4/5", "11").End()                        
+
+                        .AddDecorator("63 mm").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "12").End()
                         .AddControl(m => m.MassRetained63mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("grams").PositionConfig("2/3", "12").End()
                         .AddControl(m => m.PercRetained63mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").PositionConfig("3/4", "12").InitiallyDisabled().End()
                         .AddControl(m => m.PercPassing63mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").PositionConfig("4/5", "12").InitiallyDisabled().End()                        
@@ -87,12 +104,14 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
                         .AddControl(m => m.MassRetained0_425mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("grams").PositionConfig("2/3", "20").End()
                         .AddControl(m => m.PercRetained0_425mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("%").InitiallyDisabled().PositionConfig("3/4", "20").End()
                         .AddControl(m => m.PercPassing0_425mm, ControlType.Number).WithBorder(BorderEnum.trb).WithSuffix("%").InitiallyDisabled().PositionConfig("4/5", "20").End()                        
-                        */                        
-                        .AddControl(m => m.MassRetainedLess0_425mm, ControlType.Number).WithPrefix("<0.425 mm").WithSuffix("grams").PositionConfig("1", "12").End()
-                        .AddControl(m => m.PercRetainedLess10_425mm, ControlType.Number).WithSuffix("%").InitiallyDisabled().PositionConfig("2", "12").End()                                                
-                        
-                        .AddControl(m => m.GradingModulus, ControlType.Number, "Grading Modulus").InitiallyDisabled().PositionConfig("1", "13").End()                        
-                        
+
+                        .AddDecorator("< 0.425 mm").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltr).PositionConfig("1/2", "21").End()
+                        .AddControl(m => m.MassRetainedLess0_425mm, ControlType.Number).WithBorder(BorderEnum.tr).WithSuffix("grams").PositionConfig("2/3", "21").End()
+                        .AddControl(m => m.PercRetainedLess10_425mm, ControlType.Number).WithBorder(BorderEnum.trb).WithSuffix("%").InitiallyDisabled().PositionConfig("3/4", "21").End()                                                
+
+                        .AddDecorator("Grading Modulus").WithMetadata("textAlign", "right").WithBorder(BorderEnum.ltrb).PositionConfig("1/2", "22").End()
+                        .AddControl(m => m.GradingModulus, ControlType.Number).WithBorder(BorderEnum.trb).InitiallyDisabled().PositionConfig("2/3", "22").End()                        
+
                     .End();                    
             moduleBuilder.AddFlowToModule("", "lab-calculator", "tmh1", flow.Flow);
         }
