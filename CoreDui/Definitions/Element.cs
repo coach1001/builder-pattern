@@ -65,6 +65,9 @@ namespace CoreDui.Definitions
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<ReactivityExpression> Reactivity;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Orientation Orientation { get; set; }
     }
 
 }

@@ -14,7 +14,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
         {
             var flow = moduleBuilder
                 .WithFlow<TestData, TestContext>("test-flow")
-                    .WithStep(m => m.PersonalDetails)                        
+                    .WithStep(m => m.PersonalDetails)
                         .Next("Next")
                         .GridConfig("1fr")
                         .AddGroup(m => m.MainMember, "Main Member")
@@ -26,7 +26,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
                             .End()
                             .AddControl(m => m.DateOfBirth, ControlType.DateTime).End()
                         .End()
-                        .AddControl(m => m.HasSpouse, ControlType.Boolean, "Do you have a spouse?")                           
+                        .AddControl(m => m.HasSpouse, ControlType.Boolean, "Do you have a spouse?")
                         .End()
                         .AddGroup(m => m.Spouse, "Spouse")
                             .GridConfig("4fr 4fr 2fr")
@@ -42,7 +42,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
                         .AddControl(m => m.HasChildren, ControlType.Boolean, "Do you have children?")
                         .End()
                         .AddArray(m => m.Children, "Children")
-                            .GridConfig("1fr 4fr")
+                            .GridConfig("1fr 4fr")                            
                             .WithReactivity(m => m.HasChildren ==  false, ReactivityType.ClearWhen)
                             .WithReactivity(m => m.HasChildren == true, ReactivityType.VisibleWhen)
                             .AddControl(m => m.isBiologicalChild, ControlType.Boolean, "Biological child?")

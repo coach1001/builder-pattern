@@ -229,6 +229,12 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> SetOrientation(Orientation orientation = Orientation.Horizontal)
+        {
+            Element.Orientation = orientation;
+            return this;
+        }
+
         public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
             WithTask<TFlowTask>(TaskTypeEnum type)
             where TFlowTask : IFlowTask<TFlowDataType, TContextType>

@@ -18,7 +18,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
                         .WithBorder(BorderEnum.ltrb)
                         .Next("Save")                        
                         .WithTask<A1CalculationTask>(TaskTypeEnum.PeriTask)                                                
-                        .AddDecorator("TMH1 - A1")
+                        .AddDecorator("A1 - Grading")
                             .PositionConfig("1/6", "1")
                             .WithMetadata("textAlign", "center")
                             .WithMetadata("textWeight", "bold")
