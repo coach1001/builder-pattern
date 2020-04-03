@@ -35,6 +35,36 @@ namespace CoreDui.Attributes
             return validator;
         }
 
+        public static ValidatorData MustBeLessThanJsConverter(object vObject)
+        {
+            var attr = (MustBeLessThanAttribute)vObject;
+            var validator = new ValidatorData
+            {
+                Name = "mustBeLessThan",
+                ParentScope = attr.ParentScope,
+                Metadata = new Dictionary<string, object>
+                        {
+                            { "targetField", attr.TargetField.FirstCharToLower() }
+                        }
+            };
+            return validator;
+        }
+
+        public static ValidatorData MustBeGreaterThanJsConverter(object vObject)
+        {
+            var attr = (MustBeGreaterThanAttribute)vObject;
+            var validator = new ValidatorData
+            {
+                Name = "mustBeGreaterThan",
+                ParentScope = attr.ParentScope,
+                Metadata = new Dictionary<string, object>
+                        {
+                            { "targetField", attr.TargetField.FirstCharToLower() }
+                        }
+            };
+            return validator;
+        }
+
         public static ValidatorData RangeJsConverter(object vObject)
         {
             var attr = (RangeAttribute)vObject;

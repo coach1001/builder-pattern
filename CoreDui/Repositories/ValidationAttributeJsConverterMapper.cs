@@ -18,6 +18,8 @@ namespace CoreDui.Repositories
             AddValidator("MinLengthAttribute", AttributesJsConverters.MinLengthJsConverter);
             AddValidator("EmailAddressAttribute", AttributesJsConverters.EmailAddressJsConverter);
             AddValidator("RangeAttribute", AttributesJsConverters.RangeJsConverter);
+            AddValidator("MustBeLessThanAttribute", AttributesJsConverters.MustBeLessThanJsConverter);
+            AddValidator("MustBeGreaterThanAttribute", AttributesJsConverters.MustBeGreaterThanJsConverter);
         }
 
         public void AddValidator(string name, Func<object, ValidatorData> function)

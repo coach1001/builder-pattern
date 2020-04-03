@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreDui.Attributes;
 
 namespace CoreDuiWebApi.Flow.TMH1.A1
 {
@@ -23,10 +24,12 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
         public decimal? Washed { get; set; }
         public decimal? Final { get; set; }
 
+        [MustBeLessThan(nameof(TotalSampleMass))]
         public decimal? MassRetained105mm { get; set; }
         public decimal? PercRetained105mm { get; set; }
         public decimal? PercPassing105mm { get; set; }
 
+        [MustBeLessThan(nameof(MassRetained105mm))]
         public decimal? MassRetained75mm { get; set; }
         public decimal? PercRetained75mm { get; set; }
         public decimal? PercPassing75mm { get; set; }
