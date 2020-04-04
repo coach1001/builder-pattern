@@ -18,6 +18,7 @@ namespace CoreDuiWebApi.Authentication
         public string LastName { get; set; }
         [Required]
         public bool AccountEnabled { get; set; }
+        public ICollection<string> Roles { get; set; }
         public string Token { get; set; }
     }
 }

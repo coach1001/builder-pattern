@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.DirectoryServices.Protocols;
 
@@ -33,6 +34,7 @@ namespace CoreDuiWebApi.Authentication
         public string DisplayName { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public ICollection<string> Roles { get; set; }
         public string Token { get; set; }
 
     }

@@ -9,8 +9,6 @@ namespace CoreDuiWebApi.Flow.TMH1.Constants
 {
     public static class Lookups
     {
-
-
         public static readonly ICollection<SelectOption> Gender = new List<SelectOption>
         {
             new SelectOption { Key = "M", Display = "Male" },

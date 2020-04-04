@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Linq;
 using System.Reflection;
 using CoreDui.Definitions;
-using System;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CoreDui.FlowControllerFeature
 {
@@ -45,7 +43,17 @@ namespace CoreDui.FlowControllerFeature
 
                     if (!feature.Controllers.Any(t => t.Name == route))
                     {
-                        var controllerTypeInfo = typeof(FlowController<,>).MakeGenericType(flow.DataType, flow.ContextType).GetTypeInfo();
+                        TypeInfo controllerTypeInfo;
+                        
+                        if (flow.RequiresAuthorization)
+                        {
+                            controllerTypeInfo = typeof(AuthorizedFlowController<,>).MakeGenericType(flow.DataType, flow.ContextType).GetTypeInfo();                            
+                        }
+                        else
+                        {
+                            controllerTypeInfo = typeof(FlowController<,>).MakeGenericType(flow.DataType, flow.ContextType).GetTypeInfo();
+                        }
+                            
                         var delegateInfo = new FlowDelegationType
                         {
                             System = module.System,

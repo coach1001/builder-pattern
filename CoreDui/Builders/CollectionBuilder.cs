@@ -229,9 +229,16 @@ namespace CoreDui.Builders
             return this;
         }
 
-        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> SetOrientation(Orientation orientation = Orientation.Horizontal)
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> Vertical(int rows = 0)
         {
-            Element.Orientation = orientation;
+            Element.Vertical = true;
+            Element.VerticalRows = rows;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> MaxRows(int rows = 0)
+        {
+            Element.MaxRows = rows;            
             return this;
         }
 

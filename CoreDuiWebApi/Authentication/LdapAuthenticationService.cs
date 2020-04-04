@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.DirectoryServices.Protocols;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,6 +9,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using CoreDuiWebApi.Authentication.DbUserEf;
+using CoreDuiWebApi.Authentication.DbUserRoleEf;
+using CoreDuiWebApi.Flow.TMH1.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -49,7 +52,11 @@ namespace CoreDuiWebApi.Authentication
                             FirstName = user.FirstName,
                             LastName = user.LastName,
                             DisplayName = user.DisplayName,
-                            AccountEnabled = true
+                            AccountEnabled = true,
+                            Roles = new List<DbUserRole>()
+                            {
+                                { new DbUserRole { Role = Roles.User } }
+                            }
                         };
                         _context.DbUsers.Add(dbUserToCreate);
                         await _context.SaveChangesAsync();
@@ -57,7 +64,8 @@ namespace CoreDuiWebApi.Authentication
                     }
                     else
                     {
-                        user.Id = dbUser[0].Id;
+                        user.Id = dbUser[0].Id;                        
+                        user.Roles = dbUser[0].Roles.Select(m => m.Role).ToList();
                     }
                     user = CreateToken(user);
                     return user;
@@ -94,20 +102,24 @@ namespace CoreDuiWebApi.Authentication
         public LdapUser CreateToken(LdapUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtConfig.SymmetricKey);
+            var key = Encoding.ASCII.GetBytes(_jwtConfig.SymmetricKey);            
             var tokenDescriptor = new SecurityTokenDescriptor
-            {
+            {                
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                             new Claim(ClaimTypes.Name, user.Id.ToString()),
                             new Claim("id", user.Id.ToString()),
                             new Claim("provider_id", user.Uid),
                             new Claim("provider", "LDAP"),
-                            new Claim("account_enabled", true.ToString())
+                            new Claim("account_enabled", true.ToString())                            
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+            foreach (var role in user.Roles)
+            {
+                tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role));
+            }            
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
             return user;

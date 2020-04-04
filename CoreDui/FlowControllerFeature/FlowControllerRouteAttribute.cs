@@ -12,10 +12,12 @@ namespace CoreDui.FlowControllerFeature
     {
         public void Apply(ControllerModel controller)
         {
-            if (controller.ControllerType.GetGenericTypeDefinition() == typeof(FlowController<,>))
+            if (
+                controller.ControllerType.GetGenericTypeDefinition() == typeof(FlowController<,>)
+                || controller.ControllerType.GetGenericTypeDefinition() == typeof(AuthorizedFlowController<,>))
             {
                 var delegateInfo = (FlowDelegationType) controller.Attributes.FirstOrDefault(x => x.GetType() == typeof(FlowDelegationType));                
-                controller.ControllerName = delegateInfo.Route;                
+                controller.ControllerName = delegateInfo.Route;
                 controller.Properties.Add("Flow", delegateInfo);
             }
         }

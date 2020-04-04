@@ -9,9 +9,9 @@ namespace CoreDuiWebApi.Email.DbEmailEf
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }                
-        public string Message { get; set; }
-        public string Status { get; set; } = "QUEUED";
-        public int RetryCount { get; set; } = 0;
+        public virtual Guid Id { get; set; }
+        public virtual string Message { get; set; }
+        public virtual string Status { get; set; } = "QUEUED";
+        public virtual int RetryCount { get; set; } = 0;
     }
 }

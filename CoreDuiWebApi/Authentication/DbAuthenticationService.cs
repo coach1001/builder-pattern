@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using CoreDuiWebApi.Authentication.DbUserEf;
+using CoreDuiWebApi.Authentication.DbUserRoleEf;
+using CoreDuiWebApi.Flow.TMH1.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -51,6 +54,10 @@ namespace CoreDuiWebApi.Authentication
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+            foreach (var role in user.Roles)
+            {
+                tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role.Role));
+            }            
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var dbUserClient = new DbUserClient
             {
@@ -63,7 +70,7 @@ namespace CoreDuiWebApi.Authentication
                 LastName = user.LastName,
                 AccountEnabled = user.AccountEnabled,
                 Token = tokenHandler.WriteToken(token)
-        };            
+            };            
             return dbUserClient;
         }
 
@@ -86,14 +93,18 @@ namespace CoreDuiWebApi.Authentication
             var saltedHash = SaltedHash.Generate(64, user.Password);
             var dbUserToCreate = new DbUser
             {
-                ProviderId = null,
+                ProviderId = user.EmailAddress,                
                 ProviderType = "EMAIL_PASSWORD",
                 EmailAddress = user.EmailAddress,
                 AccountEnabled = false,
                 ConfirmEmailToken = Guid.NewGuid(),
                 ConfirmEmailTokenExpiresAt = DateTime.UtcNow.AddMinutes(30),
                 Hash = saltedHash.Hash,
-                Salt = saltedHash.Salt
+                Salt = saltedHash.Salt,
+                Roles = new List<DbUserRole>()
+                {
+                    { new DbUserRole { Role = Roles.User } }
+                }
             };
             _context.DbUsers.Add(dbUserToCreate);
             await _context.SaveChangesAsync();

@@ -79,7 +79,22 @@ namespace CoreDui.Attributes
             };
             return validator;
         }
-        
+
+        public static ValidatorData CollectionRangeJsConverter(object vObject)
+        {
+            var attr = (CollectionRangeAttribute)vObject;
+            var validator = new ValidatorData
+            {
+                Name = "collectionRange",
+                Metadata = new Dictionary<string, object>
+                        {
+                            { "minCount", attr.MinCount },
+                            { "maxCount", attr.MaxCount }
+                        }
+            };
+            return validator;
+        }
+
         public static ValidatorData RequiredIfJsConverter(object vObject)
         {
             var attr = (RequiredIfAttribute)vObject;

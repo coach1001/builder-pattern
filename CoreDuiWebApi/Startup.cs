@@ -11,6 +11,8 @@ using CoreDuiWebApi.Flow;
 using CoreDuiWebApi.Flow.Account.UserLogin;
 using CoreDuiWebApi.Flow.Account.UserRegistration;
 using CoreDuiWebApi.Flow.TMH1.A1;
+using CoreDuiWebApi.Flow.TMH1.A2A3A4;
+using CoreDuiWebApi.Flow.TMH1.A7;
 using CoreDuiWebApi.Flow.TMH1.TestFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -59,6 +61,9 @@ namespace CoreDuiWebApi
             UserLoginFlow.RegisterFlow(moduleBuilder);
 
             A1Flow.RegisterFlow(moduleBuilder);
+            A2A3A4Flow.RegisterFlow(moduleBuilder);
+            A7Flow.RegisterFlow(moduleBuilder);
+
             TestFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
@@ -130,7 +135,9 @@ namespace CoreDuiWebApi
             });
 
             services.AddDbContext<DbLabCalcContext>(o => 
-            { o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
+            {
+                o.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             services.Configure<LdapConfig>(Configuration.GetSection("Ldap"));
             services.Configure<JwtConfig>(Configuration.GetSection("Jwt"));

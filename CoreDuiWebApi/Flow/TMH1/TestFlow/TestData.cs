@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreDui.Attributes;
 using CoreDui.Definitions;
 
 namespace CoreDuiWebApi.Flow.TMH1.TestFlow
@@ -18,6 +20,9 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
         public bool HasSpouse { get; set; }
         public IndividualDetails Spouse { get; set; }
         public bool HasChildren { get; set; }
+        
+        [RequiredIf(nameof(HasChildren), true)]
+        [CollectionRange(1, 3)]
         public ICollection<Child> Children { get; set; }
     }
 

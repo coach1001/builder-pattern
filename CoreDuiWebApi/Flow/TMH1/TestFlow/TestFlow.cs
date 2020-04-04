@@ -14,6 +14,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
         {
             var flow = moduleBuilder
                 .WithFlow<TestData, TestContext>("test-flow")
+                    .RequiresAuthorization()
                     .WithStep(m => m.PersonalDetails)
                         .Next("Next")
                         .GridConfig("1fr")

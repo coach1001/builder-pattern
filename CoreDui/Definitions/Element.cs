@@ -67,7 +67,11 @@ namespace CoreDui.Definitions
         public ICollection<ReactivityExpression> Reactivity;
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public Orientation Orientation { get; set; }
+        public bool Vertical { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int VerticalRows { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int MaxRows { get; set; }
     }
 
 }

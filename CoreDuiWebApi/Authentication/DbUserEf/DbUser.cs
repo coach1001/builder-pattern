@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CoreDuiWebApi.Authentication.DbUserRoleEf;
 
 namespace CoreDuiWebApi.Authentication.DbUserEf
 {
@@ -8,26 +10,26 @@ namespace CoreDuiWebApi.Authentication.DbUserEf
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }                
-        public string ProviderId { get; set; }        
-        public string EmailAddress { get; set;}
+        public virtual Guid Id { get; set; }
+        public virtual string ProviderId { get; set; }
+        public virtual string EmailAddress { get; set;}
         [Required]
-        public string ProviderType { get; set; }
-        public string Name { get; private set; }
-        public string DisplayName { get; set; }
+        public virtual string ProviderType { get; set; }
+        public virtual string Name { get; private set; }
+        public virtual string DisplayName { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
         [Required]
-        public bool AccountEnabled { get; set; }
-        public Guid ConfirmEmailToken { get; set; }
-        public DateTime ConfirmEmailTokenExpiresAt { get; set; }
-        public Guid RefreshToken { get; set; }
-        public DateTime RefreshTokenExpiresAt { get; set; }
-        public string Hash { get; set; }
-        public string Salt { get; set; }
-        public Guid ResetPasswordToken { get; set; }
-        public DateTime ResetPasswordTokenExpiresAt { get; set; }
-
+        public virtual bool AccountEnabled { get; set; }
+        public virtual Guid ConfirmEmailToken { get; set; }
+        public virtual DateTime ConfirmEmailTokenExpiresAt { get; set; }
+        public virtual Guid RefreshToken { get; set; }
+        public virtual DateTime RefreshTokenExpiresAt { get; set; }
+        public virtual string Hash { get; set; }
+        public virtual string Salt { get; set; }
+        public virtual Guid ResetPasswordToken { get; set; }
+        public virtual DateTime ResetPasswordTokenExpiresAt { get; set; }
+        public virtual ICollection<DbUserRole> Roles { get; set; }
     }
 }

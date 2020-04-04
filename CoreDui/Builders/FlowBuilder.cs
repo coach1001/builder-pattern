@@ -13,7 +13,7 @@ namespace CoreDui.Builders
     public class FlowBuilder<TFlowDataType, TContextType> : IFlowBuilder
         where TContextType : BaseContextModel
     {
-        
+
         private readonly IElementTypeTemplateMapper _elementMapper;
         private readonly IControlTypeTemplateMapper _controlMapper;
         private readonly IValidationAttributeJsConverterMapper _validationMapper;
@@ -39,7 +39,7 @@ namespace CoreDui.Builders
             Flow.Steps = new List<Element>();
         }
 
-        public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType> 
+        public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType>
             WithStep<TDerived>(Expression<Func<TFlowDataType, TDerived>> property, string name = null, string icon = null)
         {
             var expression = (MemberExpression)property.Body;
@@ -64,6 +64,23 @@ namespace CoreDui.Builders
             }
             Flow.Steps.Add(builder.Element);
             return builder;
+        }
+
+        public FlowBuilder<TFlowDataType, TContextType>
+            RequiresAuthorization(bool requiresAuthorization = true)
+        {
+            Flow.RequiresAuthorization = requiresAuthorization;
+            return this;
+        }
+
+        public FlowBuilder<TFlowDataType, TContextType>
+            AllowedRoles(string[] roles)
+        {
+            foreach(var role in roles)
+            {
+                Flow.AllowedRoles.Add(role);
+            }
+            return this;
         }
 
         public FlowDefinition Build()

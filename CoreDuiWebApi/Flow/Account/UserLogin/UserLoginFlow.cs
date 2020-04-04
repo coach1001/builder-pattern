@@ -12,7 +12,7 @@ namespace CoreDuiWebApi.Flow.Account.UserLogin
         public static void RegisterFlow(IModuleBuilder moduleBuilder)
         {
             var flow = moduleBuilder
-                .WithFlow<UserLoginModel, UserLoginContext>("user-login")
+                .WithFlow<UserLoginModel, UserLoginContext>("user-login")                    
                     .WithStep(m => m.UserLoginDetails, "details", "create")    
                         .Next("Login")
                         .GridConfig("2fr 5fr 2fr")

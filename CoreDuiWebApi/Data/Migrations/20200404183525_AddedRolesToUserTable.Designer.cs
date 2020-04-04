@@ -4,14 +4,16 @@ using CoreDuiWebApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoreDuiWebApi.Data.Migrations
 {
     [DbContext(typeof(DbLabCalcContext))]
-    partial class DbUserContextModelSnapshot : ModelSnapshot
+    [Migration("20200404183525_AddedRolesToUserTable")]
+    partial class AddedRolesToUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,11 +96,11 @@ namespace CoreDuiWebApi.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DbUserId")
+                    b.Property<Guid?>("DbUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -106,10 +108,6 @@ namespace CoreDuiWebApi.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DbUserId");
-
-                    b.HasIndex("Role", "DbUserId")
-                        .IsUnique()
-                        .HasFilter("[Role] IS NOT NULL");
 
                     b.ToTable("DbUserRoles");
                 });
@@ -144,9 +142,7 @@ namespace CoreDuiWebApi.Data.Migrations
                 {
                     b.HasOne("CoreDuiWebApi.Authentication.DbUserEf.DbUser", null)
                         .WithMany("Roles")
-                        .HasForeignKey("DbUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DbUserId");
                 });
 #pragma warning restore 612, 618
         }
