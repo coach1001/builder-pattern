@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using CoreDui.Definitions;
+using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using CoreDui.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -35,8 +36,11 @@ namespace CoreDui.FlowControllerFeature
 
             foreach(var task in tasks)
             {
-                var taskToExecute = (IFlowTask<TFlowDataType, TContextType>) _scope.Resolve(task.Type);
-                taskData = await taskToExecute.Execute(taskData);                
+                if(task.ExecuteOn == ExecuteOn.Api)
+                {
+                    var taskToExecute = (IFlowTask<TFlowDataType, TContextType>)_scope.Resolve(task.Type);
+                    taskData = await taskToExecute.Execute(taskData);
+                }
             }
 
             return taskData;

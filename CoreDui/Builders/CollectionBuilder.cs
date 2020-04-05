@@ -254,7 +254,27 @@ namespace CoreDui.Builders
             {
                 Type = typeof(TFlowTask),
                 TaskType = type,
-                RequiresValidDataToExecute = false
+                RequiresValidDataToExecute = false,
+                ExecuteOn = ExecuteOn.Api
+            };
+            Element.Tasks.Add(task);
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            WithUiTask(TaskTypeEnum type, string uiTask)
+        {
+            if (Element.Tasks == null)
+            {
+                Element.Tasks = new List<TaskDefinition>();
+            }
+            var task = new TaskDefinition
+            {
+                Type = null,
+                TaskType = type,    
+                ExecuteOn = ExecuteOn.Ui,
+                RequiresValidDataToExecute = false,
+                UiTask = uiTask
             };
             Element.Tasks.Add(task);
             return this;

@@ -56,7 +56,7 @@ namespace CoreDui.Builders
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
             builder.Element.Icon = icon;
-            builder.WithTask<DefaultFlowPersistanceTask<TFlowDataType, TContextType>>(TaskTypeEnum.PostTask);
+            // builder.WithTask<DefaultFlowPersistanceTask<TFlowDataType, TContextType>>(TaskTypeEnum.PostTask);
 
             if (validators != null)
             {

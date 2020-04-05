@@ -7,8 +7,7 @@ namespace CoreDuiWebApi.Flow.Account.UserLogin
 {
     public class UserLoginModel
     {        
-        public UserLoginDetails UserLoginDetails { get; set; }
-        public object LoginDone { get; set; }
+        public UserLoginDetails UserLoginDetails { get; set; }        
     }
 
     public class UserLoginDetails

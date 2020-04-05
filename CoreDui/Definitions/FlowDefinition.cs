@@ -10,6 +10,7 @@ namespace CoreDui.Definitions
     {
         public string Flow { get; set; }
 
+        [JsonIgnore]
         public bool RequiresAuthorization { get; set; } = false;
 
         public string TaskPath { get; set; }
@@ -23,8 +24,7 @@ namespace CoreDui.Definitions
         public ICollection<TaskDefinition> Tasks { get; set; }
 
         public ICollection<Element> Steps;
-
-        [JsonIgnore]
+        
         public ICollection<string> AllowedRoles = new List<string>();
     }
 

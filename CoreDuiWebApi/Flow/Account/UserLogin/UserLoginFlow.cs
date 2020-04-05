@@ -12,21 +12,19 @@ namespace CoreDuiWebApi.Flow.Account.UserLogin
         public static void RegisterFlow(IModuleBuilder moduleBuilder)
         {
             var flow = moduleBuilder
-                .WithFlow<UserLoginModel, UserLoginContext>("user-login")                    
-                    .WithStep(m => m.UserLoginDetails, "details", "create")    
+                .WithFlow<UserLoginModel, UserLoginContext>("user-login")
+                    .WithStep(m => m.UserLoginDetails, "details", "create")
                         .Next("Login")
                         .GridConfig("2fr 5fr 2fr")
                         .AddControl(m => m.UsernameOrEmailAddress, ControlType.Text, "Username or Email address")
-                            .PositionConfig("2 / 3", "1 / 1")
+                            .PositionConfig("2/3", "1")
                         .End()
                         .AddControl(m => m.Password, ControlType.HideableText, "Password")
-                            .PositionConfig("2 / 3", "2 / 2")
+                            .PositionConfig("2/3", "2")
                         .End()
                         .WithTask<UserLoginTask>(TaskTypeEnum.PostTask)
-                    .End()
-                    .WithStep(m => m.LoginDone, "done", "done")
-                        .Next("Done")
-                    .End();                    
+                        .WithUiTask(TaskTypeEnum.PostTask, "login")
+                    .End();
             moduleBuilder.AddFlowToModule("", "lab-calculator", "account", flow.Flow);
         }
     }

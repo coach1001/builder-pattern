@@ -12,7 +12,8 @@ namespace CoreDui.Definitions
         public Type Type { get; set; }
         public bool RequiresValidDataToExecute { get; set; }
         public TaskTypeEnum TaskType { get; set; }
-
+        public ExecuteOn ExecuteOn { get; set; }
+        public string UiTask { get; set; }
         public TaskTypeEnum GetTaskType()
         {
             return TaskType;
