@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CoreDuiWebApi.Data;
 using CoreDuiWebApi.Email;
 
-namespace CoreDuiWebApi.Email.DbEmailEf
+namespace CoreDuiWebApi.Email.Data
 {
-    public class DbEmail : Common
+    public class DbEmail : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreDuiWebApi.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreDuiWebApi.Authentication.DbUserRoleEf
+namespace CoreDuiWebApi.Authentication.Data
 {
     [Table("DbUserRoles")]
-    public class DbUserRole : Common
+    public class DbUserRole : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

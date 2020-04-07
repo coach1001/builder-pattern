@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CoreDui.Definitions;
-using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using CoreDuiWebApi.Authentication;
 using CoreDuiWebApi.Email.Templates;
@@ -54,7 +51,7 @@ namespace CoreDuiWebApi.Flow.Account.UserLogin
                     taskData.Context.UpdatedAt = DateTime.UtcNow;
                     taskData.Context.LdapUser = null;
                     taskData.Context.DbUser = dbUser;                    
-                }
+                }                
             }
             return taskData;
         }

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CoreDuiWebApi.Authentication.DbUserEf;
+using CoreDuiWebApi.Authentication.Data;
 
 namespace CoreDuiWebApi.Authentication
 {

@@ -13,8 +13,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A7
         public static void RegisterFlow(IModuleBuilder moduleBuilder)
         {
             var flow = moduleBuilder
-                .WithFlow<A7Model, A7Context>("a7")
-                    .RequiresAuthorization()
+                .WithFlow<A7Model, A7Context>("a7")                    
                     .WithStep(m => m.Data)
                         .GridConfig("repeat(5,1fr)")
                         .WithBorder(BorderEnum.ltrb)

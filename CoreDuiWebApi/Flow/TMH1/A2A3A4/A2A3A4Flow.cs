@@ -13,8 +13,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A2A3A4
         public static void RegisterFlow(IModuleBuilder moduleBuilder)
         {
             var flow = moduleBuilder
-                .WithFlow<A2A3A4Model, A2A3A4Context>("a2a3a4")
-                    .RequiresAuthorization()
+                .WithFlow<A2A3A4Model, A2A3A4Context>("a2a3a4")                    
                     .WithStep(m => m.Data)
                         .GridConfig("1fr 1fr 1fr")
                         .WithBorder(BorderEnum.ltrb)

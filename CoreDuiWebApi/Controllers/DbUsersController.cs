@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CoreDuiWebApi.Authentication.DbUserEf;
+using CoreDuiWebApi.Authentication.Data;
+using CoreDuiWebApi.Data;
 
 namespace CoreDuiWebApi.Controllers
 {

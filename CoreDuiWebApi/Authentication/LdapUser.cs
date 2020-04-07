@@ -9,6 +9,9 @@ namespace CoreDuiWebApi.Authentication
     [DebuggerDisplay("{Uid}")]
     public class LdapUser
     {
+        LdapUser()
+        {
+        }
 
         internal LdapUser(SearchResultEntry entry)
         {
@@ -26,7 +29,6 @@ namespace CoreDuiWebApi.Authentication
                 }
             }
         }
-
 
         public string Uid { get; private set; }
         public Guid Id { get; set; }

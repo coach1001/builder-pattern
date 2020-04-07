@@ -5,6 +5,7 @@ using CoreDui.FlowControllerFeature;
 using CoreDui.Persistance;
 using CoreDui.Repositories;
 using CoreDuiWebApi.Authentication;
+using CoreDuiWebApi.Data;
 using CoreDuiWebApi.Email;
 using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
@@ -17,6 +18,7 @@ using CoreDuiWebApi.Flow.TMH1.TestFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -148,6 +150,8 @@ namespace CoreDuiWebApi
             services.AddScoped<IAuthenticationService<LdapUser>, LdapAuthenticationService>();
             services.AddScoped<IAuthenticationService<DbUserClient>, DbAuthenticationService>();
             services.AddScoped<IEmailTemplates, EmailTemplates>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

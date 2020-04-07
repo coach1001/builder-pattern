@@ -9,8 +9,7 @@ namespace CoreDui.Definitions
     public class FlowDefinition
     {
         public string Flow { get; set; }
-
-        [JsonIgnore]
+        
         public bool RequiresAuthorization { get; set; } = false;
 
         public string TaskPath { get; set; }

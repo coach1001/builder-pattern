@@ -4,14 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreDuiWebApi.Authentication
+namespace CoreDuiWebApi.Data
 {
-    public class Common
+    public class BaseEntity
     {
         [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         [Required]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; }
+        public Guid? UpdatedBy { get; set; }
     }
 
 

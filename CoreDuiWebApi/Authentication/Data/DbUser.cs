@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CoreDuiWebApi.Authentication.DbUserRoleEf;
+using CoreDuiWebApi.Data;
 
-namespace CoreDuiWebApi.Authentication.DbUserEf
+namespace CoreDuiWebApi.Authentication.Data
 {
-    public class DbUser : Common
+    public class DbUser : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

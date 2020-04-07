@@ -5,8 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using CoreDuiWebApi.Authentication.DbUserEf;
-using CoreDuiWebApi.Authentication.DbUserRoleEf;
+using CoreDuiWebApi.Authentication.Data;
+using CoreDuiWebApi.Data;
 using CoreDuiWebApi.Flow.TMH1.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -69,8 +69,9 @@ namespace CoreDuiWebApi.Authentication
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 AccountEnabled = user.AccountEnabled,
-                Token = tokenHandler.WriteToken(token)
-            };            
+                Token = tokenHandler.WriteToken(token),
+                Roles = user.Roles.Select(m => m.Role).ToList()
+        };            
             return dbUserClient;
         }
 
