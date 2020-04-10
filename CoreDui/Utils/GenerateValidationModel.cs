@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using CoreDui.Definitions;
 using CoreDui.Repositories;
 
@@ -13,11 +14,14 @@ namespace CoreDui.Utils
             foreach (var attr_ in attrs)
             {
                 var attr__ = (Attribute) attr_;
-                var attrName = attr__.GetType().Name;
-                var validator = validatorMapper.GetValidator(attrName).Invoke(attr_);
-                if(validator != null)
+                if(attr__.GetType().BaseType == typeof(ValidationAttribute))
                 {
-                    validators.Add(validator);
+                    var attrName = attr__.GetType().Name;
+                    var validator = validatorMapper.GetValidator(attrName).Invoke(attr_);
+                    if (validator != null)
+                    {
+                        validators.Add(validator);
+                    }
                 }
             }
             return validators.Count > 0 ? validators : null;

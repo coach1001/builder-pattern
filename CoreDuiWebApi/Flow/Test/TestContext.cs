@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreDui.Definitions;
 
-namespace CoreDuiWebApi.Flow.TMH1.TestFlow
+namespace CoreDuiWebApi.Flow.Test
 {
     public class TestContext : BaseContextModel
     {

@@ -54,8 +54,9 @@ namespace CoreDui.Definitions
         public AppendInput Suffix;
         
         public bool InitiallyDisabled = false;
-        
-        public BorderEnum BorderConfig = BorderEnum.none;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public BorderEnum BorderConfig;
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public GridConfig GridConfig;
@@ -67,11 +68,13 @@ namespace CoreDui.Definitions
         public ICollection<ReactivityExpression> Reactivity;
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public bool Vertical { get; set; }
+        public bool? Vertical { get; set; }
+
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int VerticalRows { get; set; }
+        public int? VerticalRows { get; set; }
+        
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int MaxRows { get; set; }
+        public int? MaxRows { get; set; }
     }
 
 }

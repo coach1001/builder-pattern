@@ -33,8 +33,8 @@ namespace CoreDui.Utils
         private static ICollection<TaskDefinition> RecurseElement(ICollection<TaskDefinition> tasks, Element elementIn, string taskPath, TaskTypeEnum taskType)
         {
             if(elementIn.TaskPath == taskPath)
-            {
-                tasks = elementIn.Tasks.Where(x => x.GetTaskType() == taskType).ToList();
+            {                                
+                tasks = elementIn.Tasks.Where(x => x.GetTaskType() == taskType).ToList();                
                 return tasks;
             }
             else if(elementIn.Elements != null)

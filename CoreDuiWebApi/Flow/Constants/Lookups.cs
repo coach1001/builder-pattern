@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreDui.Definitions;
 
-namespace CoreDuiWebApi.Flow.TMH1.Constants
+namespace CoreDuiWebApi.Flow.Constants
 {
     public static class Lookups
     {

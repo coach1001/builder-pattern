@@ -6,7 +6,7 @@ using CoreDui.Builders;
 using CoreDui.Definitions;
 using CoreDui.Enums;
 
-namespace CoreDuiWebApi.Flow.TMH1.TestFlow
+namespace CoreDuiWebApi.Flow.Test
 {
     public static class TestFlow
     {        
@@ -16,6 +16,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
                 .WithFlow<TestData, TestContext>("test-flow")
                     .RequiresAuthorization()
                     .WithStep(m => m.PersonalDetails)
+                        .WithTask<TestTask>(TaskTypeEnum.PostTask)
                         .Next("Next")
                         .GridConfig("1fr")
                         .AddGroup(m => m.MainMember, "Main Member")
@@ -42,9 +43,9 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
                         .End()
                         .AddControl(m => m.HasChildren, ControlType.Boolean, "Do you have children?")
                         .End()
-                        .AddArray(m => m.Children, "Children")
-                            .GridConfig("1fr 4fr")                            
-                            .WithReactivity(m => m.HasChildren ==  false, ReactivityType.ClearWhen)
+                        .AddArray(m => m.Children, "Children")                            
+                            .GridConfig("1fr 4fr")
+                            .WithReactivity(m => m.HasChildren == false, ReactivityType.ClearWhen)
                             .WithReactivity(m => m.HasChildren == true, ReactivityType.VisibleWhen)
                             .AddControl(m => m.isBiologicalChild, ControlType.Boolean, "Biological child?")
                             .End()
@@ -59,7 +60,7 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
                             .End()
                         .End()
                     .End();
-            moduleBuilder.AddFlowToModule("", "lab-calculator", "tmh1", flow.Flow);
+            moduleBuilder.AddFlowToModule("", "lab-calculator", "test", flow.Flow);
         }
     }
 }

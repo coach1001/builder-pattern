@@ -37,6 +37,7 @@ namespace CoreDui.Builders
             Flow.ContextType = typeof(TContextType);
             Flow.Flow = name;
             Flow.Steps = new List<Element>();
+            Flow.Tasks = new List<TaskDefinition>();
         }
 
         public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType>
@@ -56,6 +57,7 @@ namespace CoreDui.Builders
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
             builder.Element.Icon = icon;
+            builder.Element.Tasks = new List<TaskDefinition>();
             // builder.WithTask<DefaultFlowPersistanceTask<TFlowDataType, TContextType>>(TaskTypeEnum.PostTask);
 
             if (validators != null)

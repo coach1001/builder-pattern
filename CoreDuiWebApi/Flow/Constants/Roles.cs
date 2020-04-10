@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreDuiWebApi.Flow.TMH1.Constants
+namespace CoreDuiWebApi.Flow.Constants
 {
     public static class Roles
     {

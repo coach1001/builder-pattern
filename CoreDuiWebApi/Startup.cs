@@ -2,6 +2,7 @@ using System.Text;
 using Autofac;
 using CoreDui.Builders;
 using CoreDui.FlowControllerFeature;
+using CoreDui.JsonSerializers.Collection;
 using CoreDui.Persistance;
 using CoreDui.Repositories;
 using CoreDuiWebApi.Authentication;
@@ -11,10 +12,10 @@ using CoreDuiWebApi.Email.Templates;
 using CoreDuiWebApi.Flow;
 using CoreDuiWebApi.Flow.Account.UserLogin;
 using CoreDuiWebApi.Flow.Account.UserRegistration;
+using CoreDuiWebApi.Flow.Test;
 using CoreDuiWebApi.Flow.TMH1.A1;
 using CoreDuiWebApi.Flow.TMH1.A2A3A4;
 using CoreDuiWebApi.Flow.TMH1.A7;
-using CoreDuiWebApi.Flow.TMH1.TestFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -83,7 +84,8 @@ namespace CoreDuiWebApi
                 j.SerializerSettings.Converters.Add(new StringEnumConverter 
                 {                     
                     NamingStrategy = new CamelCaseNamingStrategy() 
-                });                
+                });
+                j.SerializerSettings.Converters.Add(new BaseCollectionConverter());
                 j.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 j.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });

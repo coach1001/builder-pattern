@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using CoreDui.Attributes;
 using CoreDui.Definitions;
+using CoreDui.JsonSerializers.Collection;
+using Newtonsoft.Json;
 
-namespace CoreDuiWebApi.Flow.TMH1.TestFlow
+namespace CoreDuiWebApi.Flow.Test
 {
     public class TestData
     {
@@ -23,10 +22,11 @@ namespace CoreDuiWebApi.Flow.TMH1.TestFlow
         
         [RequiredIf(nameof(HasChildren), true)]
         [CollectionRange(1, 3)]
+        [JsonConverter(typeof(BaseCollectionConverter))]
         public ICollection<Child> Children { get; set; }
     }
 
-    public class Child
+    public class Child : BaseCollectionModel
     {
         public bool isBiologicalChild { get; set; }
         public IndividualDetails Details { get; set; }

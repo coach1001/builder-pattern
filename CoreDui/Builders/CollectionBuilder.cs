@@ -8,6 +8,8 @@ using CoreDui.Utils;
 using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using shortid;
+using System.Reflection;
+using System.Linq;
 
 namespace CoreDui.Builders
 {
@@ -58,10 +60,8 @@ namespace CoreDui.Builders
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Object);
-            builder.Element.Tasks = new List<TaskDefinition>
-            {
+            builder.Element.Tasks = new List<TaskDefinition>();
 
-            };
             if (validators != null)
             {
                 builder.Element.Validators = validators;
@@ -86,6 +86,30 @@ namespace CoreDui.Builders
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}[]";
             builder.Element.DataType = property.ReturnType.GetGenericArguments()[0];
             builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Array);
+            builder.Element.Tasks = new List<TaskDefinition>();
+
+            var collectionHasId = typeof(TDerived).GetProperties().Any(m => m.Name == "Id__");
+
+            if(collectionHasId)
+            {
+                builder.Element.Elements.Add(new Element
+                {
+                    ModelProperty = "id__",
+                    TaskPath = $"{Element.TaskPath}.{modelProperty}[].id__",
+                    ElementType = ElementType.Control,
+                    DataType = typeof(Guid),   
+                    Tasks = new List<TaskDefinition>()
+                });
+                builder.Element.Elements.Add(new Element
+                {
+                    ModelProperty = "operation__",
+                    TaskPath = $"{Element.TaskPath}.{modelProperty}[].operation__",
+                    ElementType = ElementType.Control,
+                    DataType = typeof(ArrayItemOperation),
+                    Tasks = new List<TaskDefinition>()
+                });
+            }
+
             if (validators != null)
             {
                 builder.Element.Validators = validators;
@@ -110,6 +134,8 @@ namespace CoreDui.Builders
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
             builder.Element.DataType = property.ReturnType;
             builder.Element.UiTemplate = _controlMapper.GetDefault(controlType);
+            builder.Element.Tasks = new List<TaskDefinition>();
+
             if (validators != null)
             {
                 builder.Element.Validators = validators;
