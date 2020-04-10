@@ -37,7 +37,7 @@ namespace CoreDuiWebApi.Flow.Test
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public SelectOption Gender { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 
 }

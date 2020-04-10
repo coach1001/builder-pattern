@@ -306,6 +306,20 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            WithDefaultValue(ICollection<TDataType> value)
+        {
+            Element.DefaultValue = value;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            WithDefaultValue(TDataType value)
+        {
+            Element.DefaultValue = value;
+            return this;
+        }
+
         public TParentType End()
         {
             return Parent;

@@ -176,6 +176,13 @@ namespace CoreDui.Builders
             return this;
         }
 
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithDefaultValue(object value)
+        {
+            Element.DefaultValue = value;
+            return this;
+        }
+
         public TParentType End()
         {
             return Parent;

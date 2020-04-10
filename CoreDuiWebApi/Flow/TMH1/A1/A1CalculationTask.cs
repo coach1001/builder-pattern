@@ -11,16 +11,16 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
         {
         }
 
-        public async Task<TaskData<A1Model, A1Context>> Execute(TaskData<A1Model, A1Context> taskData)
-        {
+        public Task<TaskData<A1Model, A1Context>> Execute(TaskData<A1Model, A1Context> taskData)
+        {            
             if(taskData.Data.Data.TotalSampleMass > 0 && taskData.Data.Data.RiffledDryMass > 0)
             {
                 taskData.Data.Data.ReductionFactor =  TruncateDecimal((taskData.Data.Data.TotalSampleMass / taskData.Data.Data.RiffledDryMass).Value, 3);
             } else
             {
                 taskData.Data.Data.ReductionFactor = null;
-            }            
-            return await Task.FromResult(taskData);
+            }
+            return Task.FromResult(taskData);
         }
 
         public decimal TruncateDecimal(decimal value, int precision)

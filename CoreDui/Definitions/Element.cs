@@ -75,6 +75,12 @@ namespace CoreDui.Definitions
         
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int? MaxRows { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int? HideControls { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public object DefaultValue { get; set; }
     }
 
 }

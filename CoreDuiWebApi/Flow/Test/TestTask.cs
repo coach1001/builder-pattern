@@ -11,9 +11,10 @@ namespace CoreDuiWebApi.Flow.Test
     {
         public Task<TaskData<TestData, TestContext>> Execute(TaskData<TestData, TestContext> taskData)
         {
-            taskData.Data.PersonalDetails.HasChildren = true;
-            taskData.Data.PersonalDetails.Children = new List<Child>();
-            taskData.Data.PersonalDetails.Children.Add(new Child());
+            if(taskData.Data.PersonalDetails.Children != null)
+            {
+                taskData.Data.PersonalDetails.Children.Clear();
+            }
             return Task.FromResult(taskData);
         }
     }
