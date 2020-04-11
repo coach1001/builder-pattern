@@ -27,6 +27,8 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
         public decimal? Washed { get; set; }
         public decimal? Final { get; set; }
 
+        public bool? Grading { get; set; }
+
         [CollectionRange(1, 14)]
         [JsonConverter(typeof(BaseCollectionConverter))]
         public ICollection<Sieve> Sieves { get; set; }
