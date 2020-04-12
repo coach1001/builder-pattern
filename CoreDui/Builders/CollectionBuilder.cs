@@ -105,7 +105,7 @@ namespace CoreDui.Builders
                     ModelProperty = "operation__",
                     TaskPath = $"{Element.TaskPath}.{modelProperty}[].operation__",
                     ElementType = ElementType.Control,
-                    DataType = typeof(ArrayItemOperation),
+                    DataType = typeof(ArrayOperation),
                     Tasks = new List<TaskDefinition>()
                 });
             }

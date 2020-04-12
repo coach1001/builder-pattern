@@ -4,10 +4,10 @@ using System.Text;
 
 namespace CoreDui.Enums
 {
-    public enum ArrayItemOperation
+    public enum ArrayOperation
     {
         Add,
-        Remove,
-        Update
+        Update,
+        Remove
     }
 }

@@ -8,9 +8,7 @@ namespace CoreDui.Definitions
 {
     public class BaseCollectionModel
     {        
-        public Guid? Id__ { get; set; } = Guid.NewGuid();
-
-        public ArrayItemOperation Operation__ { get; set; } = ArrayItemOperation.Add;
+        public Guid? Id__ { get; set; } 
+        public ArrayOperation? Operation__ { get; set; }
     }
 }
- 

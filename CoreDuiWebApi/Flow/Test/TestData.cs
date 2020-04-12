@@ -18,7 +18,7 @@ namespace CoreDuiWebApi.Flow.Test
         public string LastName { get; set; }
         public bool HasSpouse { get; set; }
         public IndividualDetails Spouse { get; set; }
-        public bool? HasChildren { get; set; }
+        public bool HasChildren { get; set; }
         
         [RequiredIf(nameof(HasChildren), true)]
         [CollectionRange(1, 3)]
