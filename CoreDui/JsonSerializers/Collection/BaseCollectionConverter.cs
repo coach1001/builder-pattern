@@ -27,11 +27,13 @@ namespace CoreDui.JsonSerializers.Collection
                 {
                     objectList.Add(item);
                 }
-            }
-            objectList.RemoveAll(o => o.Operation__ == ArrayItemOperation.Remove);
+            }            
             objectList.ForEach(o =>
             {
-                o.Operation__ = ArrayItemOperation.Update;
+                if(o.Operation__ == ArrayItemOperation.Add)
+                {
+                    o.Operation__ = ArrayItemOperation.Update;
+                }                
             });
             serializer.Serialize(writer, objectList);            
         }

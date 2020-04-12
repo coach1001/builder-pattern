@@ -14,7 +14,8 @@ namespace CoreDui.Utils
             foreach (var attr_ in attrs)
             {
                 var attr__ = (Attribute) attr_;
-                if(attr__.GetType().BaseType == typeof(ValidationAttribute))
+                if(attr__.GetType().BaseType == typeof(ValidationAttribute)
+                    || attr__.GetType().BaseType == typeof(RequiredAttribute))
                 {
                     var attrName = attr__.GetType().Name;
                     var validator = validatorMapper.GetValidator(attrName).Invoke(attr_);

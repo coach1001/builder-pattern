@@ -95,7 +95,7 @@ namespace CoreDui.Builders
                 builder.Element.Elements.Add(new Element
                 {
                     ModelProperty = "id__",
-                    TaskPath = $"{Element.TaskPath}.{modelProperty}[].id__",
+                    TaskPath = $"{Element.TaskPath}.{modelProperty}[].id__",                    
                     ElementType = ElementType.Control,
                     DataType = typeof(Guid),   
                     Tasks = new List<TaskDefinition>()
@@ -317,6 +317,13 @@ namespace CoreDui.Builders
             WithDefaultValue(TDataType value)
         {
             Element.DefaultValue = value;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            HideAddAndDelete(bool hide = true)
+        {
+            Element.HideAddAndDelete = hide;
             return this;
         }
 

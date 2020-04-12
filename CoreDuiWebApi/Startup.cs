@@ -68,6 +68,7 @@ namespace CoreDuiWebApi
             A7Flow.RegisterFlow(moduleBuilder);
 
             TestFlow.RegisterFlow(moduleBuilder);
+            SimpleFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
             {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreDui", "CoreDui\CoreDui.csproj", "{8FBE6D11-CAD7-4C1C-97CB-6B88BB0AE662}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreDuiWebApi", "CoreDuiWebApi\CoreDuiWebApi.csproj", "{77D5FBA7-9B61-4E0B-9384-563738FAE74A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreDui", "CoreDui\CoreDui.csproj", "{8FBE6D11-CAD7-4C1C-97CB-6B88BB0AE662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

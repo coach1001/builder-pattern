@@ -7,6 +7,7 @@ namespace CoreDuiWebApi.Flow.Constants
 {
     public static class Appendixes
     {
+        public const string Millimeters = "mm";
         public const string Grams = "grams";
         public const string Percentage = "%";
         public const string MilliLiter = "ml";

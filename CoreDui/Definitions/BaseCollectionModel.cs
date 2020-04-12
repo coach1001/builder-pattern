@@ -10,8 +10,7 @@ namespace CoreDui.Definitions
     {        
         public Guid? Id__ { get; set; } = Guid.NewGuid();
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
-        public ArrayItemOperation? Operation__ { get; set; }
+        public ArrayItemOperation Operation__ { get; set; } = ArrayItemOperation.Add;
     }
 }
  
