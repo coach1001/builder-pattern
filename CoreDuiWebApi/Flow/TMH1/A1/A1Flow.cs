@@ -48,8 +48,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
                                 .InitiallyDisabled()
                             .End()
                         .End()
-                        .AddControl(m => m.GradingModulus, ControlType.Number, "Grading Modulus").InitiallyDisabled().PositionConfig("1", "13").End()
-                        
+                        .AddControl(m => m.GradingModulus, ControlType.Number, "Grading Modulus").InitiallyDisabled().PositionConfig("1", "13").End()                        
                     .End();                    
             moduleBuilder.AddFlowToModule("", "lab-calculator", "tmh1", flow.Flow);
         }
