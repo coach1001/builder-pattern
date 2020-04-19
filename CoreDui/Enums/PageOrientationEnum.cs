@@ -4,13 +4,9 @@ using System.Text;
 
 namespace CoreDui.Enums
 {
-    public enum ElementType
+    public enum PageOrientation
     {
-        Object,
-        Array,
-        Control,
-        Report,
-        Page
+        Portrait,
+        Landscape
     }
-
 }

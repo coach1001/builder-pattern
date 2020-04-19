@@ -14,7 +14,9 @@ namespace CoreDui.Repositories
 
             AddTemplate("defaultObject", ElementType.Object, true);
             AddTemplate("defaultArray", ElementType.Array, true);
-            AddTemplate("defaultControl", ElementType.Array, true);
+            AddTemplate("defaultControl", ElementType.Control, true);
+            AddTemplate("defaultReport", ElementType.Report, true);
+            AddTemplate("defaultPage", ElementType.Page, true);
         }
 
         public void AddTemplate(string templateName, ElementType elementType, bool default_ = false)

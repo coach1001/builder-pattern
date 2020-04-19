@@ -35,7 +35,7 @@ namespace CoreDui.JsonSerializers.Collection
                     o.Operation__ = ArrayOperation.Update;
                 }                
             });
-            objectList.RemoveAll(o => o.Operation__ == ArrayOperation.Remove);
+            // objectList.RemoveAll(o => o.Operation__ == ArrayOperation.Remove);
             serializer.Serialize(writer, objectList);            
         }
         

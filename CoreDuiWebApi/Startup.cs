@@ -16,6 +16,7 @@ using CoreDuiWebApi.Flow.Test;
 using CoreDuiWebApi.Flow.TMH1.A1;
 using CoreDuiWebApi.Flow.TMH1.A2A3A4;
 using CoreDuiWebApi.Flow.TMH1.A7;
+using CoreDuiWebApi.Flow.Reports;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -69,6 +70,8 @@ namespace CoreDuiWebApi
 
             TestFlow.RegisterFlow(moduleBuilder);
             SimpleFlow.RegisterFlow(moduleBuilder);
+            
+            MainReportFlow.RegisterFlow(moduleBuilder);
 
             services.AddControllers(c =>
             {

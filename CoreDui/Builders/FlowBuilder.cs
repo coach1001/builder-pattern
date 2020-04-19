@@ -68,6 +68,34 @@ namespace CoreDui.Builders
             return builder;
         }
 
+        public CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType>
+            WithReport<TDerived>(Expression<Func<TFlowDataType, TDerived>> property, string name = null, string icon = null)
+        {
+            var expression = (MemberExpression)property.Body;
+            var attrs = expression.Member.GetCustomAttributes(false);
+            var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
+            var modelProperty = expression.Member.Name.FirstCharToLower();
+            name = name != null ? name : modelProperty;
+
+            var builder = new CollectionBuilder<TFlowDataType, FlowBuilder<TFlowDataType, TContextType>, TFlowDataType, TDerived, TContextType>
+                (this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Report);
+
+            builder.Element.ModelProperty = modelProperty;
+            builder.Element.TaskPath = $"{Flow.TaskPath}.{modelProperty}";
+            builder.Element.DataType = property.ReturnType;
+            builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Report);
+            builder.Element.Icon = icon;
+            builder.Element.Tasks = new List<TaskDefinition>();
+            // builder.WithTask<DefaultFlowPersistanceTask<TFlowDataType, TContextType>>(TaskTypeEnum.PostTask);
+
+            if (validators != null)
+            {
+                builder.Element.Validators = validators;
+            }
+            Flow.Steps.Add(builder.Element);
+            return builder;
+        }
+
         public FlowBuilder<TFlowDataType, TContextType>
             RequiresAuthorization(bool requiresAuthorization = true)
         {

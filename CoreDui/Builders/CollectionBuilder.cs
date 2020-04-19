@@ -118,6 +118,40 @@ namespace CoreDui.Builders
             return builder;
         }
 
+        public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
+            AddPage<TDerived>(Expression<Func<TDataType, TDerived>> property, string name = null)
+        {
+            var expression = (MemberExpression)property.Body;
+            var attrs = expression.Member.GetCustomAttributes(false);
+            var validators = GenerateValidationModel.Generate(attrs, _validationMapper);
+            var modelProperty = expression.Member.Name.FirstCharToLower();
+            // name = name != null ? name : modelProperty;
+            var builder = new CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
+                (this, name, _elementMapper, _controlMapper, _validationMapper, ElementType.Page);
+            builder.Element.ModelProperty = modelProperty;
+            builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}";
+            builder.Element.DataType = property.ReturnType;
+            builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Page);
+            builder.Element.Tasks = new List<TaskDefinition>();
+            if (validators != null)
+            {
+                builder.Element.Validators = validators;
+            }
+            Element.Elements.Add(builder.Element);
+            return builder;
+        }
+        
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType> Orientation(PageOrientation orientation = PageOrientation.Portrait )
+        {
+            if(Element.Metadata == null)
+            {
+                Element.Metadata = new Dictionary<string, object>();
+            }
+            Element.Metadata.Add("pageOrientation", orientation);
+            return this;
+        }
+
+
         public ControlBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TContextType>
             AddControl<TPropertyType>(Expression<Func<TDataType, TPropertyType>> property, ControlType controlType = ControlType.Text, string name = null)
         {

@@ -18,7 +18,6 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
                     .RequiresAuthorization()
                     .WithStep(m => m.Data)
                         .GridConfig("3fr 6fr")                        
-                        .WithBorder(BorderEnum.ltrb)
                         .Next("Save")
                         .WithTask<A1CalculationTask>(TaskTypeEnum.PeriTask)
                         .AddDecorator("A1 - Grading")
