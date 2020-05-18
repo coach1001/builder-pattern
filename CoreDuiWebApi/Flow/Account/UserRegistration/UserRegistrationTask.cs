@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CoreDui.Definitions;
-using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using CoreDuiWebApi.Authentication;
 using CoreDuiWebApi.Email.Templates;
-using Microsoft.Extensions.Options;
 
 namespace CoreDuiWebApi.Flow.Account.UserRegistration
 {

@@ -43,7 +43,7 @@ namespace CoreDuiWebApi.Data
                     ((BaseEntity)entityEntry.Entity).CreatedAt = DateTime.Now;
                 }
 
-                // var userId = _httpContextAccessor.HttpContext.User.Claims.Select(claim => claim.Type === ClaimTypes)
+                // var userId = _httpContextAccessor.HttpContext.User.Claims.Select(claim => claim.Type == ClaimTypes)
             }
             return base.SaveChanges();
         }

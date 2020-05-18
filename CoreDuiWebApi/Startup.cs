@@ -30,6 +30,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using CoreDuiWebApi.Flow.Account.UserEdit;
 
 namespace CoreDuiWebApi
 {
@@ -63,6 +64,7 @@ namespace CoreDuiWebApi
 
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
             UserLoginFlow.RegisterFlow(moduleBuilder);
+            UserEditFlow.RegisterFlow(moduleBuilder);
 
             A1Flow.RegisterFlow(moduleBuilder);
             A2A3A4Flow.RegisterFlow(moduleBuilder);

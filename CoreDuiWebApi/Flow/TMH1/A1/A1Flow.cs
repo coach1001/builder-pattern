@@ -40,7 +40,7 @@ namespace CoreDuiWebApi.Flow.TMH1.A1
                             .HideAddAndDelete()
                             .WithDefaultValue(SievesConstant.A1Sieves)                            
                             .AddControl(m => m.Size, ControlType.Number, "Sieve Size").PositionConfig("1").WithSuffix(Appendixes.Millimeters).InitiallyDisabled().End()
-                            .AddControl(m => m.MassRetained, ControlType.Number, "Mass Retained").WithSuffix(Appendixes.Grams).PositionConfig("2").End()
+                            .AddControl(m => m.MassRetained, ControlType.Number, "Mass Retained").WithSuffix(Appendixes.Grams).PositionConfig("2").WithMetadata("decimal", 2).End()
                             .AddControl(m => m.PercPassing, ControlType.Number, "Percentage Passing").WithSuffix(Appendixes.Percentage).PositionConfig("3").InitiallyDisabled().End()
                             .AddControl(m => m.PercRetained, ControlType.Number, "Percentage Retained").WithSuffix(Appendixes.Percentage).PositionConfig("4")
                                 .WithReactivity(m => m.Size != "< 0.425", ReactivityType.VisibleWhen)
