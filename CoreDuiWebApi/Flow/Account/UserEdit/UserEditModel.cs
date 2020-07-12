@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using CoreDui.Attributes;
+using CoreDui.Definitions;
+using CoreDui.JsonSerializers.Collection;
+using Newtonsoft.Json;
 
 namespace CoreDuiWebApi.Flow.Account.UserEdit
 {
@@ -11,11 +15,12 @@ namespace CoreDuiWebApi.Flow.Account.UserEdit
 
     public class UserGrid
     {
+        [JsonConverter(typeof(BaseCollectionConverter))]
         public ICollection<User> Users { get; set; }
     }
 
-    public class User
-    {            
+    public class User : BaseCollectionModel
+    {
         public Guid Id { get; set; }
         public string ProviderId { get; set; }
         public string ProviderType { get; set; }

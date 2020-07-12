@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace CoreDui.Definitions
 {
-    public class BaseCollectionModel
+    public abstract class BaseCollectionModel
     {        
         public Guid? Id__ { get; set; } 
         public ArrayOperation? Operation__ { get; set; }

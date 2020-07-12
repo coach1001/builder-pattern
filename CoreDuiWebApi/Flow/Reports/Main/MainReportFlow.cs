@@ -15,7 +15,7 @@ namespace CoreDuiWebApi.Flow.Reports
         {
             var flow = moduleBuilder.WithFlow<MainReportModel, MainReportContext>("tmh1-main-report")
                  .RequiresAuthorization()
-                 .WithReport(m => m.Data, "TMH1 Report")
+                 .WithReport(m => m.Data, "report")
                     .AddPage(m => m.Page1, "Page 1")
                     .End()
                     .AddPage(m => m.Page2, "Page 2")

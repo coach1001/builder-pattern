@@ -9,6 +9,7 @@ namespace CoreDui.JsonSerializers.Collection
 {
     public class BaseCollectionConverter : JsonConverter
     {
+
         public override bool CanConvert(Type objectType)
         {
             return (objectType == typeof(ICollection<BaseCollectionModel>));
@@ -18,7 +19,7 @@ namespace CoreDui.JsonSerializers.Collection
         public override bool CanWrite => true;
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        {            
             ICollection collection = value as ICollection;
             var objectList = new List<BaseCollectionModel>();
             if(collection != null)

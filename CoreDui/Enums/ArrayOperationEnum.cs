@@ -8,6 +8,7 @@ namespace CoreDui.Enums
     {
         Add,
         Update,
-        Remove
+        Remove,
+        ReadOnly
     }
 }

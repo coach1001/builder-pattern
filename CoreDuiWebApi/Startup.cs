@@ -31,6 +31,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using CoreDuiWebApi.Flow.Account.UserEdit;
+using CoreDui.Enums;
 
 namespace CoreDuiWebApi
 {
@@ -61,6 +62,7 @@ namespace CoreDuiWebApi
             services.AddSingleton<IFlowPersistance>(inMemoryFlowPersistance);
             
             validationMapper.AddValidator("MaxLengthAttribute", CustomAttribuesJsConverters.MaxLengthJsConverter);
+            controlMapper.AddTemplate("defaultButton", ControlType.Button, true);
 
             UserRegistrationFlow.RegisterFlow(moduleBuilder);
             UserLoginFlow.RegisterFlow(moduleBuilder);

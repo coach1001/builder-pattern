@@ -8,7 +8,6 @@ using CoreDui.Utils;
 using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using shortid;
-using System.Reflection;
 using System.Linq;
 
 namespace CoreDui.Builders
@@ -71,7 +70,7 @@ namespace CoreDui.Builders
         }
 
         public CollectionBuilder<TFlowDataType, CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>, TDataType, TDerived, TContextType>
-            AddArray<TDerived>(Expression<Func<TDataType, ICollection<TDerived>>> property, string name = null)
+            AddArray<TDerived>(Expression<Func<TDataType, ICollection<TDerived>>> property, string name = null, string uiTemplate = null)
         {
             var expression = (MemberExpression)property.Body;
             var attrs = expression.Member.GetCustomAttributes(false);
@@ -84,8 +83,8 @@ namespace CoreDui.Builders
 
             builder.Element.ModelProperty = modelProperty;
             builder.Element.TaskPath = $"{Element.TaskPath}.{modelProperty}[]";
-            builder.Element.DataType = property.ReturnType.GetGenericArguments()[0];
-            builder.Element.UiTemplate = _elementMapper.GetDefault(ElementType.Array);
+            builder.Element.DataType = property.ReturnType.GetGenericArguments()[0];           
+            builder.Element.UiTemplate = uiTemplate ?? _elementMapper.GetDefault(ElementType.Array);
             builder.Element.Tasks = new List<TaskDefinition>();
 
             var collectionHasId = typeof(TDerived).GetProperties().Any(m => m.Name == "Id__");
@@ -351,6 +350,17 @@ namespace CoreDui.Builders
             WithDefaultValue(TDataType value)
         {
             Element.DefaultValue = value;
+            return this;
+        }
+
+        public CollectionBuilder<TFlowDataType, TParentType, TParentDataType, TDataType, TContextType>
+            WithMetadata(string key, object value)
+        {
+            if (Element.Metadata == null)
+            {
+                Element.Metadata = new Dictionary<string, object>();
+            }
+            Element.Metadata[key] = value;
             return this;
         }
 

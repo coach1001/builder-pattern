@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CoreDui.Definitions;
+using CoreDui.Enums;
 using CoreDui.TaskHandling;
 using CoreDuiWebApi.Data;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,8 @@ namespace CoreDuiWebApi.Flow.Account.UserEdit
                 {
                     taskData.Data.UserGrid.Users.Add(new User
                     {
+                        Id__ = user.Id,
+                        Operation__ = ArrayOperation.ReadOnly,
                         Id = user.Id,
                         ProviderId = user.ProviderId,
                         ProviderType = user.ProviderType,

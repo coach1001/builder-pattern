@@ -92,7 +92,7 @@ namespace CoreDui.Builders
         }
 
         public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
-            WithTask<TFlowTask>(TaskTypeEnum type)
+            WithTask<TFlowTask>(TaskTypeEnum type, string v)
             where TFlowTask : IFlowTask<TFlowDataType, TContextType>
         {
             if (Element.Tasks == null)
@@ -104,6 +104,25 @@ namespace CoreDui.Builders
                 Type = typeof(TFlowTask),
                 TaskType = type,
                 RequiresValidDataToExecute = false
+            };
+            Element.Tasks.Add(task);
+            return this;
+        }
+
+        public ControlBuilder<TFlowDataType, TParentType, TParentDataType, TContextType>
+            WithUiTask(TaskTypeEnum type, string uiTask)
+        {
+            if (Element.Tasks == null)
+            {
+                Element.Tasks = new List<TaskDefinition>();
+            }
+            var task = new TaskDefinition
+            {
+                Type = null,
+                TaskType = type,
+                ExecuteOn = ExecuteOn.Ui,
+                RequiresValidDataToExecute = false,
+                UiTask = uiTask
             };
             Element.Tasks.Add(task);
             return this;

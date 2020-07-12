@@ -14,8 +14,9 @@ namespace CoreDui.Enums
         DateTime,
         HideableText,
         Decorator,
-        Spacer
+        Spacer,
+        Button,
+        Column
     }
-
 }
 
